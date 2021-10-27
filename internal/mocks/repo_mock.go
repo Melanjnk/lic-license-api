@@ -4,11 +4,12 @@
 // Package mocks is a generated GoMock package.
 package mocks
 
+/*
 import (
+	"github.com/ozonmp/lic-license-api/internal/model"
 	reflect "reflect"
 
 	gomock "github.com/golang/mock/gomock"
-	model "github.com/ozonmp/omp-demo-api/internal/model"
 )
 
 // MockEventRepo is a mock of EventRepo interface.
@@ -29,7 +30,7 @@ func NewMockEventRepo(ctrl *gomock.Controller) *MockEventRepo {
 	return mock
 }
 
-// EXPECT returns an object that allows the caller to indicate expected use.
+// EXPECT returns an object that allows the caller to indicate expected use.type MockLicenseEventRepo struct
 func (m *MockEventRepo) EXPECT() *MockEventRepoMockRecorder {
 	return m.recorder
 }
@@ -90,3 +91,4 @@ func (mr *MockEventRepoMockRecorder) Unlock(arg0 interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Unlock", reflect.TypeOf((*MockEventRepo)(nil).Unlock), arg0)
 }
+*/

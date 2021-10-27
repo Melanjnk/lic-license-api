@@ -23,7 +23,7 @@ type licenseProducer struct {
 	repo   repo.LicenseEventRepo
 	events <-chan license.LicenseEvent
 
-	workerPool *workerpool.RetranslatorWorkerLicPool
+	workerPool workerpool.WorkerLicPool
 
 	wg   *sync.WaitGroup
 	done chan bool
@@ -33,7 +33,7 @@ func NewKafkaLicenseProducer(
 	n uint64,
 	sender sender.LicenseEventSender,
 	events <-chan license.LicenseEvent,
-	workerPool *workerpool.RetranslatorWorkerLicPool,
+	workerPool workerpool.WorkerLicPool,
 ) LicenseProducer {
 
 	wg := &sync.WaitGroup{}

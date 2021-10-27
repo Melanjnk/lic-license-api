@@ -1,11 +1,10 @@
 package producer
 
 import (
+	"github.com/ozonmp/lic-license-api/internal/app/sender"
+	"github.com/ozonmp/lic-license-api/internal/model"
 	"sync"
 	"time"
-
-	"github.com/ozonmp/omp-demo-api/internal/app/sender"
-	"github.com/ozonmp/omp-demo-api/internal/model"
 
 	"github.com/gammazero/workerpool"
 )

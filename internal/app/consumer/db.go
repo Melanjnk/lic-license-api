@@ -1,11 +1,10 @@
 package consumer
 
 import (
+	"github.com/ozonmp/lic-license-api/internal/app/repo"
+	"github.com/ozonmp/lic-license-api/internal/model"
 	"sync"
 	"time"
-
-	"github.com/ozonmp/omp-demo-api/internal/app/repo"
-	"github.com/ozonmp/omp-demo-api/internal/model"
 )
 
 type Consumer interface {

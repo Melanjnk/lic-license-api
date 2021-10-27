@@ -1,6 +1,7 @@
 package retranslator
 
 import (
+	"context"
 	"github.com/ozonmp/lic-license-api/internal/mocks"
 	"testing"
 	"time"
@@ -11,10 +12,12 @@ import (
 func TestStart(t *testing.T) {
 
 	ctrl := gomock.NewController(t)
-	repo := mocks.NewMockEventRepo(ctrl)
-	sender := mocks.NewMockEventSender(ctrl)
+	repo := mocks.MockLicenseEventRepo(ctrl)
+	sender := mocks.NewMockLicenseEventSender(ctrl)
 
 	repo.EXPECT().Lock(gomock.Any()).AnyTimes()
+	ctx, cancel := context.WithCancel(context.Background())
+	defer cancel()
 
 	cfg := Config{
 		ChannelSize:    512,
@@ -28,6 +31,6 @@ func TestStart(t *testing.T) {
 	}
 
 	retranslator := NewRetranslator(cfg)
-	retranslator.Start()
+	retranslator.Start(ctx)
 	retranslator.Close()
 }

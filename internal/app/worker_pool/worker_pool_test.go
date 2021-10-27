@@ -13,15 +13,15 @@ import (
 func TestWorkerPool(t *testing.T) {
 	workersCount := 5
 	var repo repo.LicenseEventRepo
-	NewWorkerPool(workersCount, repo)
+	NewWorkerLicPool(workersCount, repo)
 }
 
-func TestCreateRetranslatorWorkerPool(t *testing.T) {
+func TestCreateRetranslatorWorkerLicPool(t *testing.T) {
 	workersCount := 5
 	var repo repo.LicenseEventRepo
 
-	wpI := NewWorkerPool(workersCount, repo)
-	_, ok := wpI.(RetranslatorWorkerPool)
+	wpI := NewWorkerLicPool(workersCount, repo)
+	_, ok := wpI.(RetranslatorWorkerLicPool)
 	assert.True(t, ok)
 }
 
@@ -50,7 +50,7 @@ func TestCleanCreatedType(t *testing.T) {
 	}
 	repo.EXPECT().Remove([]uint64{event.ID}).Return(nil).Times(1)
 
-	wp := RetranslatorWorkerPool{
+	wp := RetranslatorWorkerLicPool{
 		repo: repo,
 	}
 	task := func() {
@@ -91,7 +91,7 @@ func TestCleanNotCreatedType(t *testing.T) {
 func checkCleanNotCreatedType(repo *mocks.MockLicenseEventRepo, event license.LicenseEvent, t *testing.T) {
 	repo.EXPECT().Remove([]uint64{event.ID}).Return(nil).Times(0)
 
-	wp := RetranslatorWorkerPool{
+	wp := RetranslatorWorkerLicPool{
 		submitter: nil,
 		repo:      repo,
 	}
@@ -122,7 +122,7 @@ func TestUpdateCreatedType(t *testing.T) {
 	}
 	repo.EXPECT().Unlock([]uint64{event.ID}).Return(nil).Times(1)
 
-	wp := RetranslatorWorkerPool{
+	wp := RetranslatorWorkerLicPool{
 		repo: repo,
 	}
 	task := func() {
@@ -164,7 +164,7 @@ func TestUpdateNotCreatedType(t *testing.T) {
 func checkUpdateNotCreatedType(repo *mocks.MockLicenseEventRepo, event license.LicenseEvent, t *testing.T) {
 	repo.EXPECT().Unlock([]uint64{event.ID}).Return(nil).Times(0)
 
-	wp := RetranslatorWorkerPool{
+	wp := RetranslatorWorkerLicPool{
 		repo: repo,
 	}
 	task := func() {
