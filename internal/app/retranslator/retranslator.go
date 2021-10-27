@@ -6,10 +6,9 @@ import (
 	"github.com/ozonmp/lic-license-api/internal/app/producer"
 	"github.com/ozonmp/lic-license-api/internal/app/repo"
 	"github.com/ozonmp/lic-license-api/internal/app/sender"
+	workerpool "github.com/ozonmp/lic-license-api/internal/app/worker_pool"
 	"github.com/ozonmp/lic-license-api/internal/model/license"
 	"time"
-
-	"github.com/gammazero/workerpool"
 )
 
 type Retranslator interface {
@@ -51,7 +50,7 @@ func NewRetranslator(cfg Config) Retranslator {
 		cfg.ProducerCount,
 		cfg.Sender,
 		events,
-		workerpool.NewWorkerPool(cfg.WorkerCount, cfg.Repo))
+		workerpool.NewWorkerLicPool(cfg.WorkerCount, cfg.Repo))
 
 	return &retranslator{
 		events:   events,
