@@ -2,6 +2,7 @@ package consumer
 
 import (
 	"context"
+	"errors"
 	"github.com/ozonmp/lic-license-api/internal/model/license"
 	"time"
 
@@ -49,4 +50,28 @@ func (suite *ConsumerTestSuite) TestStart() {
 
 	suite.repo.EXPECT().Add(gomock.Any()).AnyTimes()
 	suite.consumer.Start(ctx)
+}
+
+func (suite *ConsumerTestSuite) TestEventChanWrite() {
+	ctx, cancel := context.WithCancel(context.Background())
+	defer cancel()
+
+	lockEvents := []license.LicenseEvent{
+		{
+			ID:     1,
+			Type:   license.Created,
+			Status: license.Deferred,
+			Entity: nil,
+		},
+	}
+
+	suite.repo.EXPECT().Lock(gomock.Any()).Return(lockEvents, nil).Times(1)
+	suite.repo.EXPECT().Lock(gomock.Any()).Return(
+		nil,
+		errors.New("some error"),
+	).AnyTimes()
+	suite.consumer.Start(ctx)
+
+	e := <-suite.events
+	suite.Require().Equal(lockEvents[0], e, "received event == sent event")
 }
