@@ -15,29 +15,77 @@ import google.protobuf.timestamp_pb2
 import ozonmp.lic_license_api.v1.lic_license_api_pb2
 
 
-class OmpTemplateApiServiceBase(abc.ABC):
+class LicLicenseApiServiceBase(abc.ABC):
 
     @abc.abstractmethod
-    async def DescribeTemplateV1(self, stream: 'grpclib.server.Stream[ozonmp.lic_license_api.v1.lic_license_api_pb2.DescribeTemplateV1Request, ozonmp.lic_license_api.v1.lic_license_api_pb2.DescribeTemplateV1Response]') -> None:
+    async def CreateLicenseV1(self, stream: 'grpclib.server.Stream[ozonmp.lic_license_api.v1.lic_license_api_pb2.CreateLicenseV1Request, ozonmp.lic_license_api.v1.lic_license_api_pb2.CreateLicenseV1Response]') -> None:
+        pass
+
+    @abc.abstractmethod
+    async def DescribeLicenseV1(self, stream: 'grpclib.server.Stream[ozonmp.lic_license_api.v1.lic_license_api_pb2.DescribeLicenseV1Request, ozonmp.lic_license_api.v1.lic_license_api_pb2.DescribeLicenseV1Response]') -> None:
+        pass
+
+    @abc.abstractmethod
+    async def ListLicenseV1(self, stream: 'grpclib.server.Stream[ozonmp.lic_license_api.v1.lic_license_api_pb2.ListLicenseV1Request, ozonmp.lic_license_api.v1.lic_license_api_pb2.ListLicenseV1Response]') -> None:
+        pass
+
+    @abc.abstractmethod
+    async def RemoveLicenseV1(self, stream: 'grpclib.server.Stream[ozonmp.lic_license_api.v1.lic_license_api_pb2.RemoveLicenseV1Request, ozonmp.lic_license_api.v1.lic_license_api_pb2.RemoveLicenseV1Response]') -> None:
         pass
 
     def __mapping__(self) -> typing.Dict[str, grpclib.const.Handler]:
         return {
-            '/ozonmp.lic_license_api.v1.OmpTemplateApiService/DescribeTemplateV1': grpclib.const.Handler(
-                self.DescribeTemplateV1,
+            '/ozonmp.lic_license_api.v1.LicLicenseApiService/CreateLicenseV1': grpclib.const.Handler(
+                self.CreateLicenseV1,
                 grpclib.const.Cardinality.UNARY_UNARY,
-                ozonmp.lic_license_api.v1.lic_license_api_pb2.DescribeTemplateV1Request,
-                ozonmp.lic_license_api.v1.lic_license_api_pb2.DescribeTemplateV1Response,
+                ozonmp.lic_license_api.v1.lic_license_api_pb2.CreateLicenseV1Request,
+                ozonmp.lic_license_api.v1.lic_license_api_pb2.CreateLicenseV1Response,
+            ),
+            '/ozonmp.lic_license_api.v1.LicLicenseApiService/DescribeLicenseV1': grpclib.const.Handler(
+                self.DescribeLicenseV1,
+                grpclib.const.Cardinality.UNARY_UNARY,
+                ozonmp.lic_license_api.v1.lic_license_api_pb2.DescribeLicenseV1Request,
+                ozonmp.lic_license_api.v1.lic_license_api_pb2.DescribeLicenseV1Response,
+            ),
+            '/ozonmp.lic_license_api.v1.LicLicenseApiService/ListLicenseV1': grpclib.const.Handler(
+                self.ListLicenseV1,
+                grpclib.const.Cardinality.UNARY_UNARY,
+                ozonmp.lic_license_api.v1.lic_license_api_pb2.ListLicenseV1Request,
+                ozonmp.lic_license_api.v1.lic_license_api_pb2.ListLicenseV1Response,
+            ),
+            '/ozonmp.lic_license_api.v1.LicLicenseApiService/RemoveLicenseV1': grpclib.const.Handler(
+                self.RemoveLicenseV1,
+                grpclib.const.Cardinality.UNARY_UNARY,
+                ozonmp.lic_license_api.v1.lic_license_api_pb2.RemoveLicenseV1Request,
+                ozonmp.lic_license_api.v1.lic_license_api_pb2.RemoveLicenseV1Response,
             ),
         }
 
 
-class OmpTemplateApiServiceStub:
+class LicLicenseApiServiceStub:
 
     def __init__(self, channel: grpclib.client.Channel) -> None:
-        self.DescribeTemplateV1 = grpclib.client.UnaryUnaryMethod(
+        self.CreateLicenseV1 = grpclib.client.UnaryUnaryMethod(
             channel,
-            '/ozonmp.lic_license_api.v1.OmpTemplateApiService/DescribeTemplateV1',
-            ozonmp.lic_license_api.v1.lic_license_api_pb2.DescribeTemplateV1Request,
-            ozonmp.lic_license_api.v1.lic_license_api_pb2.DescribeTemplateV1Response,
+            '/ozonmp.lic_license_api.v1.LicLicenseApiService/CreateLicenseV1',
+            ozonmp.lic_license_api.v1.lic_license_api_pb2.CreateLicenseV1Request,
+            ozonmp.lic_license_api.v1.lic_license_api_pb2.CreateLicenseV1Response,
+        )
+        self.DescribeLicenseV1 = grpclib.client.UnaryUnaryMethod(
+            channel,
+            '/ozonmp.lic_license_api.v1.LicLicenseApiService/DescribeLicenseV1',
+            ozonmp.lic_license_api.v1.lic_license_api_pb2.DescribeLicenseV1Request,
+            ozonmp.lic_license_api.v1.lic_license_api_pb2.DescribeLicenseV1Response,
+        )
+        self.ListLicenseV1 = grpclib.client.UnaryUnaryMethod(
+            channel,
+            '/ozonmp.lic_license_api.v1.LicLicenseApiService/ListLicenseV1',
+            ozonmp.lic_license_api.v1.lic_license_api_pb2.ListLicenseV1Request,
+            ozonmp.lic_license_api.v1.lic_license_api_pb2.ListLicenseV1Response,
+        )
+        self.RemoveLicenseV1 = grpclib.client.UnaryUnaryMethod(
+            channel,
+            '/ozonmp.lic_license_api.v1.LicLicenseApiService/RemoveLicenseV1',
+            ozonmp.lic_license_api.v1.lic_license_api_pb2.RemoveLicenseV1Request,
+            ozonmp.lic_license_api.v1.lic_license_api_pb2.RemoveLicenseV1Response,
         )

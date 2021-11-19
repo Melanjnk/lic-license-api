@@ -14,88 +14,202 @@ import (
 // Requires gRPC-Go v1.32.0 or later.
 const _ = grpc.SupportPackageIsVersion7
 
-// OmpTemplateApiServiceClient is the client API for OmpTemplateApiService service.
+// LicLicenseApiServiceClient is the client API for LicLicenseApiService service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
-type OmpTemplateApiServiceClient interface {
-	// DescribeTemplateV1 - Describe a template
-	DescribeTemplateV1(ctx context.Context, in *DescribeTemplateV1Request, opts ...grpc.CallOption) (*DescribeTemplateV1Response, error)
+type LicLicenseApiServiceClient interface {
+	// CreateLicenseV1 - Create a license
+	CreateLicenseV1(ctx context.Context, in *CreateLicenseV1Request, opts ...grpc.CallOption) (*CreateLicenseV1Response, error)
+	// DescribeLicenseV1 - Describe a license
+	DescribeLicenseV1(ctx context.Context, in *DescribeLicenseV1Request, opts ...grpc.CallOption) (*DescribeLicenseV1Response, error)
+	// ListLicenseV1 - Describe a license
+	ListLicenseV1(ctx context.Context, in *ListLicenseV1Request, opts ...grpc.CallOption) (*ListLicenseV1Response, error)
+	// RemoveLicenseV1 - Remove a license
+	RemoveLicenseV1(ctx context.Context, in *RemoveLicenseV1Request, opts ...grpc.CallOption) (*RemoveLicenseV1Response, error)
 }
 
-type ompTemplateApiServiceClient struct {
+type licLicenseApiServiceClient struct {
 	cc grpc.ClientConnInterface
 }
 
-func NewOmpTemplateApiServiceClient(cc grpc.ClientConnInterface) OmpTemplateApiServiceClient {
-	return &ompTemplateApiServiceClient{cc}
+func NewLicLicenseApiServiceClient(cc grpc.ClientConnInterface) LicLicenseApiServiceClient {
+	return &licLicenseApiServiceClient{cc}
 }
 
-func (c *ompTemplateApiServiceClient) DescribeTemplateV1(ctx context.Context, in *DescribeTemplateV1Request, opts ...grpc.CallOption) (*DescribeTemplateV1Response, error) {
-	out := new(DescribeTemplateV1Response)
-	err := c.cc.Invoke(ctx, "/ozonmp.lic_license_api.v1.OmpTemplateApiService/DescribeTemplateV1", in, out, opts...)
+func (c *licLicenseApiServiceClient) CreateLicenseV1(ctx context.Context, in *CreateLicenseV1Request, opts ...grpc.CallOption) (*CreateLicenseV1Response, error) {
+	out := new(CreateLicenseV1Response)
+	err := c.cc.Invoke(ctx, "/ozonmp.lic_license_api.v1.LicLicenseApiService/CreateLicenseV1", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-// OmpTemplateApiServiceServer is the server API for OmpTemplateApiService service.
-// All implementations must embed UnimplementedOmpTemplateApiServiceServer
+func (c *licLicenseApiServiceClient) DescribeLicenseV1(ctx context.Context, in *DescribeLicenseV1Request, opts ...grpc.CallOption) (*DescribeLicenseV1Response, error) {
+	out := new(DescribeLicenseV1Response)
+	err := c.cc.Invoke(ctx, "/ozonmp.lic_license_api.v1.LicLicenseApiService/DescribeLicenseV1", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *licLicenseApiServiceClient) ListLicenseV1(ctx context.Context, in *ListLicenseV1Request, opts ...grpc.CallOption) (*ListLicenseV1Response, error) {
+	out := new(ListLicenseV1Response)
+	err := c.cc.Invoke(ctx, "/ozonmp.lic_license_api.v1.LicLicenseApiService/ListLicenseV1", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *licLicenseApiServiceClient) RemoveLicenseV1(ctx context.Context, in *RemoveLicenseV1Request, opts ...grpc.CallOption) (*RemoveLicenseV1Response, error) {
+	out := new(RemoveLicenseV1Response)
+	err := c.cc.Invoke(ctx, "/ozonmp.lic_license_api.v1.LicLicenseApiService/RemoveLicenseV1", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// LicLicenseApiServiceServer is the server API for LicLicenseApiService service.
+// All implementations must embed UnimplementedLicLicenseApiServiceServer
 // for forward compatibility
-type OmpTemplateApiServiceServer interface {
-	// DescribeTemplateV1 - Describe a template
-	DescribeTemplateV1(context.Context, *DescribeTemplateV1Request) (*DescribeTemplateV1Response, error)
-	mustEmbedUnimplementedOmpTemplateApiServiceServer()
+type LicLicenseApiServiceServer interface {
+	// CreateLicenseV1 - Create a license
+	CreateLicenseV1(context.Context, *CreateLicenseV1Request) (*CreateLicenseV1Response, error)
+	// DescribeLicenseV1 - Describe a license
+	DescribeLicenseV1(context.Context, *DescribeLicenseV1Request) (*DescribeLicenseV1Response, error)
+	// ListLicenseV1 - Describe a license
+	ListLicenseV1(context.Context, *ListLicenseV1Request) (*ListLicenseV1Response, error)
+	// RemoveLicenseV1 - Remove a license
+	RemoveLicenseV1(context.Context, *RemoveLicenseV1Request) (*RemoveLicenseV1Response, error)
+	mustEmbedUnimplementedLicLicenseApiServiceServer()
 }
 
-// UnimplementedOmpTemplateApiServiceServer must be embedded to have forward compatible implementations.
-type UnimplementedOmpTemplateApiServiceServer struct {
+// UnimplementedLicLicenseApiServiceServer must be embedded to have forward compatible implementations.
+type UnimplementedLicLicenseApiServiceServer struct {
 }
 
-func (UnimplementedOmpTemplateApiServiceServer) DescribeTemplateV1(context.Context, *DescribeTemplateV1Request) (*DescribeTemplateV1Response, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method DescribeTemplateV1 not implemented")
+func (UnimplementedLicLicenseApiServiceServer) CreateLicenseV1(context.Context, *CreateLicenseV1Request) (*CreateLicenseV1Response, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateLicenseV1 not implemented")
 }
-func (UnimplementedOmpTemplateApiServiceServer) mustEmbedUnimplementedOmpTemplateApiServiceServer() {}
+func (UnimplementedLicLicenseApiServiceServer) DescribeLicenseV1(context.Context, *DescribeLicenseV1Request) (*DescribeLicenseV1Response, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DescribeLicenseV1 not implemented")
+}
+func (UnimplementedLicLicenseApiServiceServer) ListLicenseV1(context.Context, *ListLicenseV1Request) (*ListLicenseV1Response, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListLicenseV1 not implemented")
+}
+func (UnimplementedLicLicenseApiServiceServer) RemoveLicenseV1(context.Context, *RemoveLicenseV1Request) (*RemoveLicenseV1Response, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method RemoveLicenseV1 not implemented")
+}
+func (UnimplementedLicLicenseApiServiceServer) mustEmbedUnimplementedLicLicenseApiServiceServer() {}
 
-// UnsafeOmpTemplateApiServiceServer may be embedded to opt out of forward compatibility for this service.
-// Use of this interface is not recommended, as added methods to OmpTemplateApiServiceServer will
+// UnsafeLicLicenseApiServiceServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to LicLicenseApiServiceServer will
 // result in compilation errors.
-type UnsafeOmpTemplateApiServiceServer interface {
-	mustEmbedUnimplementedOmpTemplateApiServiceServer()
+type UnsafeLicLicenseApiServiceServer interface {
+	mustEmbedUnimplementedLicLicenseApiServiceServer()
 }
 
-func RegisterOmpTemplateApiServiceServer(s grpc.ServiceRegistrar, srv OmpTemplateApiServiceServer) {
-	s.RegisterService(&OmpTemplateApiService_ServiceDesc, srv)
+func RegisterLicLicenseApiServiceServer(s grpc.ServiceRegistrar, srv LicLicenseApiServiceServer) {
+	s.RegisterService(&LicLicenseApiService_ServiceDesc, srv)
 }
 
-func _OmpTemplateApiService_DescribeTemplateV1_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(DescribeTemplateV1Request)
+func _LicLicenseApiService_CreateLicenseV1_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateLicenseV1Request)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(OmpTemplateApiServiceServer).DescribeTemplateV1(ctx, in)
+		return srv.(LicLicenseApiServiceServer).CreateLicenseV1(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/ozonmp.lic_license_api.v1.OmpTemplateApiService/DescribeTemplateV1",
+		FullMethod: "/ozonmp.lic_license_api.v1.LicLicenseApiService/CreateLicenseV1",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(OmpTemplateApiServiceServer).DescribeTemplateV1(ctx, req.(*DescribeTemplateV1Request))
+		return srv.(LicLicenseApiServiceServer).CreateLicenseV1(ctx, req.(*CreateLicenseV1Request))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-// OmpTemplateApiService_ServiceDesc is the grpc.ServiceDesc for OmpTemplateApiService service.
+func _LicLicenseApiService_DescribeLicenseV1_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DescribeLicenseV1Request)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(LicLicenseApiServiceServer).DescribeLicenseV1(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/ozonmp.lic_license_api.v1.LicLicenseApiService/DescribeLicenseV1",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(LicLicenseApiServiceServer).DescribeLicenseV1(ctx, req.(*DescribeLicenseV1Request))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _LicLicenseApiService_ListLicenseV1_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListLicenseV1Request)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(LicLicenseApiServiceServer).ListLicenseV1(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/ozonmp.lic_license_api.v1.LicLicenseApiService/ListLicenseV1",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(LicLicenseApiServiceServer).ListLicenseV1(ctx, req.(*ListLicenseV1Request))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _LicLicenseApiService_RemoveLicenseV1_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(RemoveLicenseV1Request)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(LicLicenseApiServiceServer).RemoveLicenseV1(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/ozonmp.lic_license_api.v1.LicLicenseApiService/RemoveLicenseV1",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(LicLicenseApiServiceServer).RemoveLicenseV1(ctx, req.(*RemoveLicenseV1Request))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+// LicLicenseApiService_ServiceDesc is the grpc.ServiceDesc for LicLicenseApiService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
-var OmpTemplateApiService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "ozonmp.lic_license_api.v1.OmpTemplateApiService",
-	HandlerType: (*OmpTemplateApiServiceServer)(nil),
+var LicLicenseApiService_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "ozonmp.lic_license_api.v1.LicLicenseApiService",
+	HandlerType: (*LicLicenseApiServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
-			MethodName: "DescribeTemplateV1",
-			Handler:    _OmpTemplateApiService_DescribeTemplateV1_Handler,
+			MethodName: "CreateLicenseV1",
+			Handler:    _LicLicenseApiService_CreateLicenseV1_Handler,
+		},
+		{
+			MethodName: "DescribeLicenseV1",
+			Handler:    _LicLicenseApiService_DescribeLicenseV1_Handler,
+		},
+		{
+			MethodName: "ListLicenseV1",
+			Handler:    _LicLicenseApiService_ListLicenseV1_Handler,
+		},
+		{
+			MethodName: "RemoveLicenseV1",
+			Handler:    _LicLicenseApiService_RemoveLicenseV1_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

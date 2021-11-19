@@ -22,37 +22,37 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   syntax='proto3',
   serialized_options=b'Z5github.com/ozonmp/lic-license-api/pkg/lic-license-api',
   create_key=_descriptor._internal_create_key,
-  serialized_pb=b'\n/ozonmp/lic_license_api/v1/lic_license_api.proto\x12\x19ozonmp.lic_license_api.v1\x1a\x17validate/validate.proto\x1a\x1cgoogle/api/annotations.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"b\n\x08Template\x12\x0e\n\x02id\x18\x01 \x01(\x04R\x02id\x12\x10\n\x03\x66oo\x18\x02 \x01(\x04R\x03\x66oo\x12\x34\n\x07\x63reated\x18\x03 \x01(\x0b\x32\x1a.google.protobuf.TimestampR\x07\x63reated\"E\n\x19\x44\x65scribeTemplateV1Request\x12(\n\x0btemplate_id\x18\x01 \x01(\x04\x42\x07\xfa\x42\x04\x32\x02 \x00R\ntemplateId\"W\n\x1a\x44\x65scribeTemplateV1Response\x12\x39\n\x05value\x18\x01 \x01(\x0b\x32#.ozonmp.lic_license_api.v1.TemplateR\x05value2\xc0\x01\n\x15OmpTemplateApiService\x12\xa6\x01\n\x12\x44\x65scribeTemplateV1\x12\x34.ozonmp.lic_license_api.v1.DescribeTemplateV1Request\x1a\x35.ozonmp.lic_license_api.v1.DescribeTemplateV1Response\"#\x82\xd3\xe4\x93\x02\x1d\x12\x1b/v1/templates/{template_id}B7Z5github.com/ozonmp/lic-license-api/pkg/lic-license-apib\x06proto3'
+  serialized_pb=b'\n/ozonmp/lic_license_api/v1/lic_license_api.proto\x12\x19ozonmp.lic_license_api.v1\x1a\x17validate/validate.proto\x1a\x1cgoogle/api/annotations.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"t\n\x07License\x12\x1d\n\nlicense_id\x18\x01 \x01(\x04R\tlicenseId\x12\x14\n\x05title\x18\x02 \x01(\x04R\x05title\x12\x34\n\x07\x63reated\x18\x03 \x01(\x0b\x32\x1a.google.protobuf.TimestampR\x07\x63reated\"b\n\x16\x43reateLicenseV1Request\x12&\n\nlicense_id\x18\x01 \x01(\x04\x42\x07\xfa\x42\x04\x32\x02 \x00R\tlicenseId\x12 \n\x05title\x18\x02 \x01(\tB\n\xfa\x42\x07r\x05\x10\x01\x18\x96\x01R\x05title\"8\n\x17\x43reateLicenseV1Response\x12\x1d\n\nlicense_id\x18\x01 \x01(\x04R\tlicenseId\"B\n\x18\x44\x65scribeLicenseV1Request\x12&\n\nlicense_id\x18\x01 \x01(\x04\x42\x07\xfa\x42\x04\x32\x02 \x00R\tlicenseId\"Y\n\x19\x44\x65scribeLicenseV1Response\x12<\n\x07license\x18\x01 \x01(\x0b\x32\".ozonmp.lic_license_api.v1.LicenseR\x07license\"\x16\n\x14ListLicenseV1Request\"U\n\x15ListLicenseV1Response\x12<\n\x07license\x18\x01 \x03(\x0b\x32\".ozonmp.lic_license_api.v1.LicenseR\x07license\"@\n\x16RemoveLicenseV1Request\x12&\n\nlicense_id\x18\x01 \x01(\x04\x42\x07\xfa\x42\x04\x32\x02 \x00R\tlicenseId\"/\n\x17RemoveLicenseV1Response\x12\x14\n\x05\x66ound\x18\x01 \x01(\x08R\x05\x66ound2\xf7\x04\n\x14LicLicenseApiService\x12\x91\x01\n\x0f\x43reateLicenseV1\x12\x31.ozonmp.lic_license_api.v1.CreateLicenseV1Request\x1a\x32.ozonmp.lic_license_api.v1.CreateLicenseV1Response\"\x17\x82\xd3\xe4\x93\x02\x11\"\x0c/v1/licenses:\x01*\x12\xa1\x01\n\x11\x44\x65scribeLicenseV1\x12\x33.ozonmp.lic_license_api.v1.DescribeLicenseV1Request\x1a\x34.ozonmp.lic_license_api.v1.DescribeLicenseV1Response\"!\x82\xd3\xe4\x93\x02\x1b\x12\x19/v1/licenses/{license_id}\x12\x88\x01\n\rListLicenseV1\x12/.ozonmp.lic_license_api.v1.ListLicenseV1Request\x1a\x30.ozonmp.lic_license_api.v1.ListLicenseV1Response\"\x14\x82\xd3\xe4\x93\x02\x0e\x12\x0c/v1/licenses\x12\x9b\x01\n\x0fRemoveLicenseV1\x12\x31.ozonmp.lic_license_api.v1.RemoveLicenseV1Request\x1a\x32.ozonmp.lic_license_api.v1.RemoveLicenseV1Response\"!\x82\xd3\xe4\x93\x02\x1b\x12\x19/v1/licenses/{license_id}B7Z5github.com/ozonmp/lic-license-api/pkg/lic-license-apib\x06proto3'
   ,
   dependencies=[validate_dot_validate__pb2.DESCRIPTOR,google_dot_api_dot_annotations__pb2.DESCRIPTOR,google_dot_protobuf_dot_timestamp__pb2.DESCRIPTOR,])
 
 
 
 
-_TEMPLATE = _descriptor.Descriptor(
-  name='Template',
-  full_name='ozonmp.lic_license_api.v1.Template',
+_LICENSE = _descriptor.Descriptor(
+  name='License',
+  full_name='ozonmp.lic_license_api.v1.License',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   create_key=_descriptor._internal_create_key,
   fields=[
     _descriptor.FieldDescriptor(
-      name='id', full_name='ozonmp.lic_license_api.v1.Template.id', index=0,
+      name='license_id', full_name='ozonmp.lic_license_api.v1.License.license_id', index=0,
       number=1, type=4, cpp_type=4, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, json_name='id', file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+      serialized_options=None, json_name='licenseId', file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
-      name='foo', full_name='ozonmp.lic_license_api.v1.Template.foo', index=1,
+      name='title', full_name='ozonmp.lic_license_api.v1.License.title', index=1,
       number=2, type=4, cpp_type=4, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, json_name='foo', file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+      serialized_options=None, json_name='title', file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
-      name='created', full_name='ozonmp.lic_license_api.v1.Template.created', index=2,
+      name='created', full_name='ozonmp.lic_license_api.v1.License.created', index=2,
       number=3, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
@@ -71,25 +71,32 @@ _TEMPLATE = _descriptor.Descriptor(
   oneofs=[
   ],
   serialized_start=166,
-  serialized_end=264,
+  serialized_end=282,
 )
 
 
-_DESCRIBETEMPLATEV1REQUEST = _descriptor.Descriptor(
-  name='DescribeTemplateV1Request',
-  full_name='ozonmp.lic_license_api.v1.DescribeTemplateV1Request',
+_CREATELICENSEV1REQUEST = _descriptor.Descriptor(
+  name='CreateLicenseV1Request',
+  full_name='ozonmp.lic_license_api.v1.CreateLicenseV1Request',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   create_key=_descriptor._internal_create_key,
   fields=[
     _descriptor.FieldDescriptor(
-      name='template_id', full_name='ozonmp.lic_license_api.v1.DescribeTemplateV1Request.template_id', index=0,
+      name='license_id', full_name='ozonmp.lic_license_api.v1.CreateLicenseV1Request.license_id', index=0,
       number=1, type=4, cpp_type=4, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=b'\372B\0042\002 \000', json_name='templateId', file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+      serialized_options=b'\372B\0042\002 \000', json_name='licenseId', file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='title', full_name='ozonmp.lic_license_api.v1.CreateLicenseV1Request.title', index=1,
+      number=2, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=b'\372B\007r\005\020\001\030\226\001', json_name='title', file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
   ],
   extensions=[
   ],
@@ -102,26 +109,26 @@ _DESCRIBETEMPLATEV1REQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=266,
-  serialized_end=335,
+  serialized_start=284,
+  serialized_end=382,
 )
 
 
-_DESCRIBETEMPLATEV1RESPONSE = _descriptor.Descriptor(
-  name='DescribeTemplateV1Response',
-  full_name='ozonmp.lic_license_api.v1.DescribeTemplateV1Response',
+_CREATELICENSEV1RESPONSE = _descriptor.Descriptor(
+  name='CreateLicenseV1Response',
+  full_name='ozonmp.lic_license_api.v1.CreateLicenseV1Response',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   create_key=_descriptor._internal_create_key,
   fields=[
     _descriptor.FieldDescriptor(
-      name='value', full_name='ozonmp.lic_license_api.v1.DescribeTemplateV1Response.value', index=0,
-      number=1, type=11, cpp_type=10, label=1,
-      has_default_value=False, default_value=None,
+      name='license_id', full_name='ozonmp.lic_license_api.v1.CreateLicenseV1Response.license_id', index=0,
+      number=1, type=4, cpp_type=4, label=1,
+      has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, json_name='value', file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+      serialized_options=None, json_name='licenseId', file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
   ],
   extensions=[
   ],
@@ -134,65 +141,332 @@ _DESCRIBETEMPLATEV1RESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=337,
-  serialized_end=424,
+  serialized_start=384,
+  serialized_end=440,
 )
 
-_TEMPLATE.fields_by_name['created'].message_type = google_dot_protobuf_dot_timestamp__pb2._TIMESTAMP
-_DESCRIBETEMPLATEV1RESPONSE.fields_by_name['value'].message_type = _TEMPLATE
-DESCRIPTOR.message_types_by_name['Template'] = _TEMPLATE
-DESCRIPTOR.message_types_by_name['DescribeTemplateV1Request'] = _DESCRIBETEMPLATEV1REQUEST
-DESCRIPTOR.message_types_by_name['DescribeTemplateV1Response'] = _DESCRIBETEMPLATEV1RESPONSE
+
+_DESCRIBELICENSEV1REQUEST = _descriptor.Descriptor(
+  name='DescribeLicenseV1Request',
+  full_name='ozonmp.lic_license_api.v1.DescribeLicenseV1Request',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  create_key=_descriptor._internal_create_key,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='license_id', full_name='ozonmp.lic_license_api.v1.DescribeLicenseV1Request.license_id', index=0,
+      number=1, type=4, cpp_type=4, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=b'\372B\0042\002 \000', json_name='licenseId', file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=442,
+  serialized_end=508,
+)
+
+
+_DESCRIBELICENSEV1RESPONSE = _descriptor.Descriptor(
+  name='DescribeLicenseV1Response',
+  full_name='ozonmp.lic_license_api.v1.DescribeLicenseV1Response',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  create_key=_descriptor._internal_create_key,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='license', full_name='ozonmp.lic_license_api.v1.DescribeLicenseV1Response.license', index=0,
+      number=1, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, json_name='license', file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=510,
+  serialized_end=599,
+)
+
+
+_LISTLICENSEV1REQUEST = _descriptor.Descriptor(
+  name='ListLicenseV1Request',
+  full_name='ozonmp.lic_license_api.v1.ListLicenseV1Request',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  create_key=_descriptor._internal_create_key,
+  fields=[
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=601,
+  serialized_end=623,
+)
+
+
+_LISTLICENSEV1RESPONSE = _descriptor.Descriptor(
+  name='ListLicenseV1Response',
+  full_name='ozonmp.lic_license_api.v1.ListLicenseV1Response',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  create_key=_descriptor._internal_create_key,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='license', full_name='ozonmp.lic_license_api.v1.ListLicenseV1Response.license', index=0,
+      number=1, type=11, cpp_type=10, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, json_name='license', file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=625,
+  serialized_end=710,
+)
+
+
+_REMOVELICENSEV1REQUEST = _descriptor.Descriptor(
+  name='RemoveLicenseV1Request',
+  full_name='ozonmp.lic_license_api.v1.RemoveLicenseV1Request',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  create_key=_descriptor._internal_create_key,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='license_id', full_name='ozonmp.lic_license_api.v1.RemoveLicenseV1Request.license_id', index=0,
+      number=1, type=4, cpp_type=4, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=b'\372B\0042\002 \000', json_name='licenseId', file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=712,
+  serialized_end=776,
+)
+
+
+_REMOVELICENSEV1RESPONSE = _descriptor.Descriptor(
+  name='RemoveLicenseV1Response',
+  full_name='ozonmp.lic_license_api.v1.RemoveLicenseV1Response',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  create_key=_descriptor._internal_create_key,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='found', full_name='ozonmp.lic_license_api.v1.RemoveLicenseV1Response.found', index=0,
+      number=1, type=8, cpp_type=7, label=1,
+      has_default_value=False, default_value=False,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, json_name='found', file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=778,
+  serialized_end=825,
+)
+
+_LICENSE.fields_by_name['created'].message_type = google_dot_protobuf_dot_timestamp__pb2._TIMESTAMP
+_DESCRIBELICENSEV1RESPONSE.fields_by_name['license'].message_type = _LICENSE
+_LISTLICENSEV1RESPONSE.fields_by_name['license'].message_type = _LICENSE
+DESCRIPTOR.message_types_by_name['License'] = _LICENSE
+DESCRIPTOR.message_types_by_name['CreateLicenseV1Request'] = _CREATELICENSEV1REQUEST
+DESCRIPTOR.message_types_by_name['CreateLicenseV1Response'] = _CREATELICENSEV1RESPONSE
+DESCRIPTOR.message_types_by_name['DescribeLicenseV1Request'] = _DESCRIBELICENSEV1REQUEST
+DESCRIPTOR.message_types_by_name['DescribeLicenseV1Response'] = _DESCRIBELICENSEV1RESPONSE
+DESCRIPTOR.message_types_by_name['ListLicenseV1Request'] = _LISTLICENSEV1REQUEST
+DESCRIPTOR.message_types_by_name['ListLicenseV1Response'] = _LISTLICENSEV1RESPONSE
+DESCRIPTOR.message_types_by_name['RemoveLicenseV1Request'] = _REMOVELICENSEV1REQUEST
+DESCRIPTOR.message_types_by_name['RemoveLicenseV1Response'] = _REMOVELICENSEV1RESPONSE
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
-Template = _reflection.GeneratedProtocolMessageType('Template', (_message.Message,), {
-  'DESCRIPTOR' : _TEMPLATE,
+License = _reflection.GeneratedProtocolMessageType('License', (_message.Message,), {
+  'DESCRIPTOR' : _LICENSE,
   '__module__' : 'ozonmp.lic_license_api.v1.lic_license_api_pb2'
-  # @@protoc_insertion_point(class_scope:ozonmp.lic_license_api.v1.Template)
+  # @@protoc_insertion_point(class_scope:ozonmp.lic_license_api.v1.License)
   })
-_sym_db.RegisterMessage(Template)
+_sym_db.RegisterMessage(License)
 
-DescribeTemplateV1Request = _reflection.GeneratedProtocolMessageType('DescribeTemplateV1Request', (_message.Message,), {
-  'DESCRIPTOR' : _DESCRIBETEMPLATEV1REQUEST,
+CreateLicenseV1Request = _reflection.GeneratedProtocolMessageType('CreateLicenseV1Request', (_message.Message,), {
+  'DESCRIPTOR' : _CREATELICENSEV1REQUEST,
   '__module__' : 'ozonmp.lic_license_api.v1.lic_license_api_pb2'
-  # @@protoc_insertion_point(class_scope:ozonmp.lic_license_api.v1.DescribeTemplateV1Request)
+  # @@protoc_insertion_point(class_scope:ozonmp.lic_license_api.v1.CreateLicenseV1Request)
   })
-_sym_db.RegisterMessage(DescribeTemplateV1Request)
+_sym_db.RegisterMessage(CreateLicenseV1Request)
 
-DescribeTemplateV1Response = _reflection.GeneratedProtocolMessageType('DescribeTemplateV1Response', (_message.Message,), {
-  'DESCRIPTOR' : _DESCRIBETEMPLATEV1RESPONSE,
+CreateLicenseV1Response = _reflection.GeneratedProtocolMessageType('CreateLicenseV1Response', (_message.Message,), {
+  'DESCRIPTOR' : _CREATELICENSEV1RESPONSE,
   '__module__' : 'ozonmp.lic_license_api.v1.lic_license_api_pb2'
-  # @@protoc_insertion_point(class_scope:ozonmp.lic_license_api.v1.DescribeTemplateV1Response)
+  # @@protoc_insertion_point(class_scope:ozonmp.lic_license_api.v1.CreateLicenseV1Response)
   })
-_sym_db.RegisterMessage(DescribeTemplateV1Response)
+_sym_db.RegisterMessage(CreateLicenseV1Response)
+
+DescribeLicenseV1Request = _reflection.GeneratedProtocolMessageType('DescribeLicenseV1Request', (_message.Message,), {
+  'DESCRIPTOR' : _DESCRIBELICENSEV1REQUEST,
+  '__module__' : 'ozonmp.lic_license_api.v1.lic_license_api_pb2'
+  # @@protoc_insertion_point(class_scope:ozonmp.lic_license_api.v1.DescribeLicenseV1Request)
+  })
+_sym_db.RegisterMessage(DescribeLicenseV1Request)
+
+DescribeLicenseV1Response = _reflection.GeneratedProtocolMessageType('DescribeLicenseV1Response', (_message.Message,), {
+  'DESCRIPTOR' : _DESCRIBELICENSEV1RESPONSE,
+  '__module__' : 'ozonmp.lic_license_api.v1.lic_license_api_pb2'
+  # @@protoc_insertion_point(class_scope:ozonmp.lic_license_api.v1.DescribeLicenseV1Response)
+  })
+_sym_db.RegisterMessage(DescribeLicenseV1Response)
+
+ListLicenseV1Request = _reflection.GeneratedProtocolMessageType('ListLicenseV1Request', (_message.Message,), {
+  'DESCRIPTOR' : _LISTLICENSEV1REQUEST,
+  '__module__' : 'ozonmp.lic_license_api.v1.lic_license_api_pb2'
+  # @@protoc_insertion_point(class_scope:ozonmp.lic_license_api.v1.ListLicenseV1Request)
+  })
+_sym_db.RegisterMessage(ListLicenseV1Request)
+
+ListLicenseV1Response = _reflection.GeneratedProtocolMessageType('ListLicenseV1Response', (_message.Message,), {
+  'DESCRIPTOR' : _LISTLICENSEV1RESPONSE,
+  '__module__' : 'ozonmp.lic_license_api.v1.lic_license_api_pb2'
+  # @@protoc_insertion_point(class_scope:ozonmp.lic_license_api.v1.ListLicenseV1Response)
+  })
+_sym_db.RegisterMessage(ListLicenseV1Response)
+
+RemoveLicenseV1Request = _reflection.GeneratedProtocolMessageType('RemoveLicenseV1Request', (_message.Message,), {
+  'DESCRIPTOR' : _REMOVELICENSEV1REQUEST,
+  '__module__' : 'ozonmp.lic_license_api.v1.lic_license_api_pb2'
+  # @@protoc_insertion_point(class_scope:ozonmp.lic_license_api.v1.RemoveLicenseV1Request)
+  })
+_sym_db.RegisterMessage(RemoveLicenseV1Request)
+
+RemoveLicenseV1Response = _reflection.GeneratedProtocolMessageType('RemoveLicenseV1Response', (_message.Message,), {
+  'DESCRIPTOR' : _REMOVELICENSEV1RESPONSE,
+  '__module__' : 'ozonmp.lic_license_api.v1.lic_license_api_pb2'
+  # @@protoc_insertion_point(class_scope:ozonmp.lic_license_api.v1.RemoveLicenseV1Response)
+  })
+_sym_db.RegisterMessage(RemoveLicenseV1Response)
 
 
 DESCRIPTOR._options = None
-_DESCRIBETEMPLATEV1REQUEST.fields_by_name['template_id']._options = None
+_CREATELICENSEV1REQUEST.fields_by_name['license_id']._options = None
+_CREATELICENSEV1REQUEST.fields_by_name['title']._options = None
+_DESCRIBELICENSEV1REQUEST.fields_by_name['license_id']._options = None
+_REMOVELICENSEV1REQUEST.fields_by_name['license_id']._options = None
 
-_OMPTEMPLATEAPISERVICE = _descriptor.ServiceDescriptor(
-  name='OmpTemplateApiService',
-  full_name='ozonmp.lic_license_api.v1.OmpTemplateApiService',
+_LICLICENSEAPISERVICE = _descriptor.ServiceDescriptor(
+  name='LicLicenseApiService',
+  full_name='ozonmp.lic_license_api.v1.LicLicenseApiService',
   file=DESCRIPTOR,
   index=0,
   serialized_options=None,
   create_key=_descriptor._internal_create_key,
-  serialized_start=427,
-  serialized_end=619,
+  serialized_start=828,
+  serialized_end=1459,
   methods=[
   _descriptor.MethodDescriptor(
-    name='DescribeTemplateV1',
-    full_name='ozonmp.lic_license_api.v1.OmpTemplateApiService.DescribeTemplateV1',
+    name='CreateLicenseV1',
+    full_name='ozonmp.lic_license_api.v1.LicLicenseApiService.CreateLicenseV1',
     index=0,
     containing_service=None,
-    input_type=_DESCRIBETEMPLATEV1REQUEST,
-    output_type=_DESCRIBETEMPLATEV1RESPONSE,
-    serialized_options=b'\202\323\344\223\002\035\022\033/v1/templates/{template_id}',
+    input_type=_CREATELICENSEV1REQUEST,
+    output_type=_CREATELICENSEV1RESPONSE,
+    serialized_options=b'\202\323\344\223\002\021\"\014/v1/licenses:\001*',
+    create_key=_descriptor._internal_create_key,
+  ),
+  _descriptor.MethodDescriptor(
+    name='DescribeLicenseV1',
+    full_name='ozonmp.lic_license_api.v1.LicLicenseApiService.DescribeLicenseV1',
+    index=1,
+    containing_service=None,
+    input_type=_DESCRIBELICENSEV1REQUEST,
+    output_type=_DESCRIBELICENSEV1RESPONSE,
+    serialized_options=b'\202\323\344\223\002\033\022\031/v1/licenses/{license_id}',
+    create_key=_descriptor._internal_create_key,
+  ),
+  _descriptor.MethodDescriptor(
+    name='ListLicenseV1',
+    full_name='ozonmp.lic_license_api.v1.LicLicenseApiService.ListLicenseV1',
+    index=2,
+    containing_service=None,
+    input_type=_LISTLICENSEV1REQUEST,
+    output_type=_LISTLICENSEV1RESPONSE,
+    serialized_options=b'\202\323\344\223\002\016\022\014/v1/licenses',
+    create_key=_descriptor._internal_create_key,
+  ),
+  _descriptor.MethodDescriptor(
+    name='RemoveLicenseV1',
+    full_name='ozonmp.lic_license_api.v1.LicLicenseApiService.RemoveLicenseV1',
+    index=3,
+    containing_service=None,
+    input_type=_REMOVELICENSEV1REQUEST,
+    output_type=_REMOVELICENSEV1RESPONSE,
+    serialized_options=b'\202\323\344\223\002\033\022\031/v1/licenses/{license_id}',
     create_key=_descriptor._internal_create_key,
   ),
 ])
-_sym_db.RegisterServiceDescriptor(_OMPTEMPLATEAPISERVICE)
+_sym_db.RegisterServiceDescriptor(_LICLICENSEAPISERVICE)
 
-DESCRIPTOR.services_by_name['OmpTemplateApiService'] = _OMPTEMPLATEAPISERVICE
+DESCRIPTOR.services_by_name['LicLicenseApiService'] = _LICLICENSEAPISERVICE
 
 # @@protoc_insertion_point(module_scope)

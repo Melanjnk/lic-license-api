@@ -33,20 +33,20 @@ var (
 	_ = anypb.Any{}
 )
 
-// Validate checks the field values on Template with the rules defined in the
+// Validate checks the field values on License with the rules defined in the
 // proto definition for this message. If any rules are violated, an error is returned.
-func (m *Template) Validate() error {
+func (m *License) Validate() error {
 	if m == nil {
 		return nil
 	}
 
-	// no validation rules for Id
+	// no validation rules for LicenseId
 
-	// no validation rules for Foo
+	// no validation rules for Title
 
 	if v, ok := interface{}(m.GetCreated()).(interface{ Validate() error }); ok {
 		if err := v.Validate(); err != nil {
-			return TemplateValidationError{
+			return LicenseValidationError{
 				field:  "Created",
 				reason: "embedded message failed validation",
 				cause:  err,
@@ -57,9 +57,9 @@ func (m *Template) Validate() error {
 	return nil
 }
 
-// TemplateValidationError is the validation error returned by
-// Template.Validate if the designated constraints aren't met.
-type TemplateValidationError struct {
+// LicenseValidationError is the validation error returned by License.Validate
+// if the designated constraints aren't met.
+type LicenseValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -67,22 +67,22 @@ type TemplateValidationError struct {
 }
 
 // Field function returns field value.
-func (e TemplateValidationError) Field() string { return e.field }
+func (e LicenseValidationError) Field() string { return e.field }
 
 // Reason function returns reason value.
-func (e TemplateValidationError) Reason() string { return e.reason }
+func (e LicenseValidationError) Reason() string { return e.reason }
 
 // Cause function returns cause value.
-func (e TemplateValidationError) Cause() error { return e.cause }
+func (e LicenseValidationError) Cause() error { return e.cause }
 
 // Key function returns key value.
-func (e TemplateValidationError) Key() bool { return e.key }
+func (e LicenseValidationError) Key() bool { return e.key }
 
 // ErrorName returns error name.
-func (e TemplateValidationError) ErrorName() string { return "TemplateValidationError" }
+func (e LicenseValidationError) ErrorName() string { return "LicenseValidationError" }
 
 // Error satisfies the builtin error interface
-func (e TemplateValidationError) Error() string {
+func (e LicenseValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -94,14 +94,14 @@ func (e TemplateValidationError) Error() string {
 	}
 
 	return fmt.Sprintf(
-		"invalid %sTemplate.%s: %s%s",
+		"invalid %sLicense.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = TemplateValidationError{}
+var _ error = LicenseValidationError{}
 
 var _ interface {
 	Field() string
@@ -109,19 +109,169 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = TemplateValidationError{}
+} = LicenseValidationError{}
 
-// Validate checks the field values on DescribeTemplateV1Request with the rules
+// Validate checks the field values on CreateLicenseV1Request with the rules
 // defined in the proto definition for this message. If any rules are
 // violated, an error is returned.
-func (m *DescribeTemplateV1Request) Validate() error {
+func (m *CreateLicenseV1Request) Validate() error {
 	if m == nil {
 		return nil
 	}
 
-	if m.GetTemplateId() <= 0 {
-		return DescribeTemplateV1RequestValidationError{
-			field:  "TemplateId",
+	if m.GetLicenseId() <= 0 {
+		return CreateLicenseV1RequestValidationError{
+			field:  "LicenseId",
+			reason: "value must be greater than 0",
+		}
+	}
+
+	if l := utf8.RuneCountInString(m.GetTitle()); l < 1 || l > 150 {
+		return CreateLicenseV1RequestValidationError{
+			field:  "Title",
+			reason: "value length must be between 1 and 150 runes, inclusive",
+		}
+	}
+
+	return nil
+}
+
+// CreateLicenseV1RequestValidationError is the validation error returned by
+// CreateLicenseV1Request.Validate if the designated constraints aren't met.
+type CreateLicenseV1RequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e CreateLicenseV1RequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e CreateLicenseV1RequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e CreateLicenseV1RequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e CreateLicenseV1RequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e CreateLicenseV1RequestValidationError) ErrorName() string {
+	return "CreateLicenseV1RequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e CreateLicenseV1RequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sCreateLicenseV1Request.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = CreateLicenseV1RequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = CreateLicenseV1RequestValidationError{}
+
+// Validate checks the field values on CreateLicenseV1Response with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, an error is returned.
+func (m *CreateLicenseV1Response) Validate() error {
+	if m == nil {
+		return nil
+	}
+
+	// no validation rules for LicenseId
+
+	return nil
+}
+
+// CreateLicenseV1ResponseValidationError is the validation error returned by
+// CreateLicenseV1Response.Validate if the designated constraints aren't met.
+type CreateLicenseV1ResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e CreateLicenseV1ResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e CreateLicenseV1ResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e CreateLicenseV1ResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e CreateLicenseV1ResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e CreateLicenseV1ResponseValidationError) ErrorName() string {
+	return "CreateLicenseV1ResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e CreateLicenseV1ResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sCreateLicenseV1Response.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = CreateLicenseV1ResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = CreateLicenseV1ResponseValidationError{}
+
+// Validate checks the field values on DescribeLicenseV1Request with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, an error is returned.
+func (m *DescribeLicenseV1Request) Validate() error {
+	if m == nil {
+		return nil
+	}
+
+	if m.GetLicenseId() <= 0 {
+		return DescribeLicenseV1RequestValidationError{
+			field:  "LicenseId",
 			reason: "value must be greater than 0",
 		}
 	}
@@ -129,9 +279,9 @@ func (m *DescribeTemplateV1Request) Validate() error {
 	return nil
 }
 
-// DescribeTemplateV1RequestValidationError is the validation error returned by
-// DescribeTemplateV1Request.Validate if the designated constraints aren't met.
-type DescribeTemplateV1RequestValidationError struct {
+// DescribeLicenseV1RequestValidationError is the validation error returned by
+// DescribeLicenseV1Request.Validate if the designated constraints aren't met.
+type DescribeLicenseV1RequestValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -139,24 +289,24 @@ type DescribeTemplateV1RequestValidationError struct {
 }
 
 // Field function returns field value.
-func (e DescribeTemplateV1RequestValidationError) Field() string { return e.field }
+func (e DescribeLicenseV1RequestValidationError) Field() string { return e.field }
 
 // Reason function returns reason value.
-func (e DescribeTemplateV1RequestValidationError) Reason() string { return e.reason }
+func (e DescribeLicenseV1RequestValidationError) Reason() string { return e.reason }
 
 // Cause function returns cause value.
-func (e DescribeTemplateV1RequestValidationError) Cause() error { return e.cause }
+func (e DescribeLicenseV1RequestValidationError) Cause() error { return e.cause }
 
 // Key function returns key value.
-func (e DescribeTemplateV1RequestValidationError) Key() bool { return e.key }
+func (e DescribeLicenseV1RequestValidationError) Key() bool { return e.key }
 
 // ErrorName returns error name.
-func (e DescribeTemplateV1RequestValidationError) ErrorName() string {
-	return "DescribeTemplateV1RequestValidationError"
+func (e DescribeLicenseV1RequestValidationError) ErrorName() string {
+	return "DescribeLicenseV1RequestValidationError"
 }
 
 // Error satisfies the builtin error interface
-func (e DescribeTemplateV1RequestValidationError) Error() string {
+func (e DescribeLicenseV1RequestValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -168,14 +318,14 @@ func (e DescribeTemplateV1RequestValidationError) Error() string {
 	}
 
 	return fmt.Sprintf(
-		"invalid %sDescribeTemplateV1Request.%s: %s%s",
+		"invalid %sDescribeLicenseV1Request.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = DescribeTemplateV1RequestValidationError{}
+var _ error = DescribeLicenseV1RequestValidationError{}
 
 var _ interface {
 	Field() string
@@ -183,20 +333,20 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = DescribeTemplateV1RequestValidationError{}
+} = DescribeLicenseV1RequestValidationError{}
 
-// Validate checks the field values on DescribeTemplateV1Response with the
-// rules defined in the proto definition for this message. If any rules are
+// Validate checks the field values on DescribeLicenseV1Response with the rules
+// defined in the proto definition for this message. If any rules are
 // violated, an error is returned.
-func (m *DescribeTemplateV1Response) Validate() error {
+func (m *DescribeLicenseV1Response) Validate() error {
 	if m == nil {
 		return nil
 	}
 
-	if v, ok := interface{}(m.GetValue()).(interface{ Validate() error }); ok {
+	if v, ok := interface{}(m.GetLicense()).(interface{ Validate() error }); ok {
 		if err := v.Validate(); err != nil {
-			return DescribeTemplateV1ResponseValidationError{
-				field:  "Value",
+			return DescribeLicenseV1ResponseValidationError{
+				field:  "License",
 				reason: "embedded message failed validation",
 				cause:  err,
 			}
@@ -206,9 +356,9 @@ func (m *DescribeTemplateV1Response) Validate() error {
 	return nil
 }
 
-// DescribeTemplateV1ResponseValidationError is the validation error returned
-// by DescribeTemplateV1Response.Validate if the designated constraints aren't met.
-type DescribeTemplateV1ResponseValidationError struct {
+// DescribeLicenseV1ResponseValidationError is the validation error returned by
+// DescribeLicenseV1Response.Validate if the designated constraints aren't met.
+type DescribeLicenseV1ResponseValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -216,24 +366,24 @@ type DescribeTemplateV1ResponseValidationError struct {
 }
 
 // Field function returns field value.
-func (e DescribeTemplateV1ResponseValidationError) Field() string { return e.field }
+func (e DescribeLicenseV1ResponseValidationError) Field() string { return e.field }
 
 // Reason function returns reason value.
-func (e DescribeTemplateV1ResponseValidationError) Reason() string { return e.reason }
+func (e DescribeLicenseV1ResponseValidationError) Reason() string { return e.reason }
 
 // Cause function returns cause value.
-func (e DescribeTemplateV1ResponseValidationError) Cause() error { return e.cause }
+func (e DescribeLicenseV1ResponseValidationError) Cause() error { return e.cause }
 
 // Key function returns key value.
-func (e DescribeTemplateV1ResponseValidationError) Key() bool { return e.key }
+func (e DescribeLicenseV1ResponseValidationError) Key() bool { return e.key }
 
 // ErrorName returns error name.
-func (e DescribeTemplateV1ResponseValidationError) ErrorName() string {
-	return "DescribeTemplateV1ResponseValidationError"
+func (e DescribeLicenseV1ResponseValidationError) ErrorName() string {
+	return "DescribeLicenseV1ResponseValidationError"
 }
 
 // Error satisfies the builtin error interface
-func (e DescribeTemplateV1ResponseValidationError) Error() string {
+func (e DescribeLicenseV1ResponseValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -245,14 +395,14 @@ func (e DescribeTemplateV1ResponseValidationError) Error() string {
 	}
 
 	return fmt.Sprintf(
-		"invalid %sDescribeTemplateV1Response.%s: %s%s",
+		"invalid %sDescribeLicenseV1Response.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = DescribeTemplateV1ResponseValidationError{}
+var _ error = DescribeLicenseV1ResponseValidationError{}
 
 var _ interface {
 	Field() string
@@ -260,4 +410,296 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = DescribeTemplateV1ResponseValidationError{}
+} = DescribeLicenseV1ResponseValidationError{}
+
+// Validate checks the field values on ListLicenseV1Request with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, an error is returned.
+func (m *ListLicenseV1Request) Validate() error {
+	if m == nil {
+		return nil
+	}
+
+	return nil
+}
+
+// ListLicenseV1RequestValidationError is the validation error returned by
+// ListLicenseV1Request.Validate if the designated constraints aren't met.
+type ListLicenseV1RequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ListLicenseV1RequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ListLicenseV1RequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ListLicenseV1RequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ListLicenseV1RequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ListLicenseV1RequestValidationError) ErrorName() string {
+	return "ListLicenseV1RequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e ListLicenseV1RequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sListLicenseV1Request.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ListLicenseV1RequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ListLicenseV1RequestValidationError{}
+
+// Validate checks the field values on ListLicenseV1Response with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, an error is returned.
+func (m *ListLicenseV1Response) Validate() error {
+	if m == nil {
+		return nil
+	}
+
+	for idx, item := range m.GetLicense() {
+		_, _ = idx, item
+
+		if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return ListLicenseV1ResponseValidationError{
+					field:  fmt.Sprintf("License[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	return nil
+}
+
+// ListLicenseV1ResponseValidationError is the validation error returned by
+// ListLicenseV1Response.Validate if the designated constraints aren't met.
+type ListLicenseV1ResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ListLicenseV1ResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ListLicenseV1ResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ListLicenseV1ResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ListLicenseV1ResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ListLicenseV1ResponseValidationError) ErrorName() string {
+	return "ListLicenseV1ResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e ListLicenseV1ResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sListLicenseV1Response.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ListLicenseV1ResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ListLicenseV1ResponseValidationError{}
+
+// Validate checks the field values on RemoveLicenseV1Request with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, an error is returned.
+func (m *RemoveLicenseV1Request) Validate() error {
+	if m == nil {
+		return nil
+	}
+
+	if m.GetLicenseId() <= 0 {
+		return RemoveLicenseV1RequestValidationError{
+			field:  "LicenseId",
+			reason: "value must be greater than 0",
+		}
+	}
+
+	return nil
+}
+
+// RemoveLicenseV1RequestValidationError is the validation error returned by
+// RemoveLicenseV1Request.Validate if the designated constraints aren't met.
+type RemoveLicenseV1RequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e RemoveLicenseV1RequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e RemoveLicenseV1RequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e RemoveLicenseV1RequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e RemoveLicenseV1RequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e RemoveLicenseV1RequestValidationError) ErrorName() string {
+	return "RemoveLicenseV1RequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e RemoveLicenseV1RequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sRemoveLicenseV1Request.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = RemoveLicenseV1RequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = RemoveLicenseV1RequestValidationError{}
+
+// Validate checks the field values on RemoveLicenseV1Response with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, an error is returned.
+func (m *RemoveLicenseV1Response) Validate() error {
+	if m == nil {
+		return nil
+	}
+
+	// no validation rules for Found
+
+	return nil
+}
+
+// RemoveLicenseV1ResponseValidationError is the validation error returned by
+// RemoveLicenseV1Response.Validate if the designated constraints aren't met.
+type RemoveLicenseV1ResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e RemoveLicenseV1ResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e RemoveLicenseV1ResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e RemoveLicenseV1ResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e RemoveLicenseV1ResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e RemoveLicenseV1ResponseValidationError) ErrorName() string {
+	return "RemoveLicenseV1ResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e RemoveLicenseV1ResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sRemoveLicenseV1Response.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = RemoveLicenseV1ResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = RemoveLicenseV1ResponseValidationError{}

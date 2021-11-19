@@ -31,8 +31,42 @@ var _ = runtime.String
 var _ = utilities.NewDoubleArray
 var _ = metadata.Join
 
-func request_OmpTemplateApiService_DescribeTemplateV1_0(ctx context.Context, marshaler runtime.Marshaler, client OmpTemplateApiServiceClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
-	var protoReq DescribeTemplateV1Request
+func request_LicLicenseApiService_CreateLicenseV1_0(ctx context.Context, marshaler runtime.Marshaler, client LicLicenseApiServiceClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+	var protoReq CreateLicenseV1Request
+	var metadata runtime.ServerMetadata
+
+	newReader, berr := utilities.IOReaderFactory(req.Body)
+	if berr != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", berr)
+	}
+	if err := marshaler.NewDecoder(newReader()).Decode(&protoReq); err != nil && err != io.EOF {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
+	}
+
+	msg, err := client.CreateLicenseV1(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
+	return msg, metadata, err
+
+}
+
+func local_request_LicLicenseApiService_CreateLicenseV1_0(ctx context.Context, marshaler runtime.Marshaler, server LicLicenseApiServiceServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+	var protoReq CreateLicenseV1Request
+	var metadata runtime.ServerMetadata
+
+	newReader, berr := utilities.IOReaderFactory(req.Body)
+	if berr != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", berr)
+	}
+	if err := marshaler.NewDecoder(newReader()).Decode(&protoReq); err != nil && err != io.EOF {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
+	}
+
+	msg, err := server.CreateLicenseV1(ctx, &protoReq)
+	return msg, metadata, err
+
+}
+
+func request_LicLicenseApiService_DescribeLicenseV1_0(ctx context.Context, marshaler runtime.Marshaler, client LicLicenseApiServiceClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+	var protoReq DescribeLicenseV1Request
 	var metadata runtime.ServerMetadata
 
 	var (
@@ -42,23 +76,23 @@ func request_OmpTemplateApiService_DescribeTemplateV1_0(ctx context.Context, mar
 		_   = err
 	)
 
-	val, ok = pathParams["template_id"]
+	val, ok = pathParams["license_id"]
 	if !ok {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "template_id")
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "license_id")
 	}
 
-	protoReq.TemplateId, err = runtime.Uint64(val)
+	protoReq.LicenseId, err = runtime.Uint64(val)
 	if err != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "template_id", err)
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "license_id", err)
 	}
 
-	msg, err := client.DescribeTemplateV1(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
+	msg, err := client.DescribeLicenseV1(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
 	return msg, metadata, err
 
 }
 
-func local_request_OmpTemplateApiService_DescribeTemplateV1_0(ctx context.Context, marshaler runtime.Marshaler, server OmpTemplateApiServiceServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
-	var protoReq DescribeTemplateV1Request
+func local_request_LicLicenseApiService_DescribeLicenseV1_0(ctx context.Context, marshaler runtime.Marshaler, server LicLicenseApiServiceServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+	var protoReq DescribeLicenseV1Request
 	var metadata runtime.ServerMetadata
 
 	var (
@@ -68,39 +102,109 @@ func local_request_OmpTemplateApiService_DescribeTemplateV1_0(ctx context.Contex
 		_   = err
 	)
 
-	val, ok = pathParams["template_id"]
+	val, ok = pathParams["license_id"]
 	if !ok {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "template_id")
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "license_id")
 	}
 
-	protoReq.TemplateId, err = runtime.Uint64(val)
+	protoReq.LicenseId, err = runtime.Uint64(val)
 	if err != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "template_id", err)
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "license_id", err)
 	}
 
-	msg, err := server.DescribeTemplateV1(ctx, &protoReq)
+	msg, err := server.DescribeLicenseV1(ctx, &protoReq)
 	return msg, metadata, err
 
 }
 
-// RegisterOmpTemplateApiServiceHandlerServer registers the http handlers for service OmpTemplateApiService to "mux".
-// UnaryRPC     :call OmpTemplateApiServiceServer directly.
+func request_LicLicenseApiService_ListLicenseV1_0(ctx context.Context, marshaler runtime.Marshaler, client LicLicenseApiServiceClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+	var protoReq ListLicenseV1Request
+	var metadata runtime.ServerMetadata
+
+	msg, err := client.ListLicenseV1(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
+	return msg, metadata, err
+
+}
+
+func local_request_LicLicenseApiService_ListLicenseV1_0(ctx context.Context, marshaler runtime.Marshaler, server LicLicenseApiServiceServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+	var protoReq ListLicenseV1Request
+	var metadata runtime.ServerMetadata
+
+	msg, err := server.ListLicenseV1(ctx, &protoReq)
+	return msg, metadata, err
+
+}
+
+func request_LicLicenseApiService_RemoveLicenseV1_0(ctx context.Context, marshaler runtime.Marshaler, client LicLicenseApiServiceClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+	var protoReq RemoveLicenseV1Request
+	var metadata runtime.ServerMetadata
+
+	var (
+		val string
+		ok  bool
+		err error
+		_   = err
+	)
+
+	val, ok = pathParams["license_id"]
+	if !ok {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "license_id")
+	}
+
+	protoReq.LicenseId, err = runtime.Uint64(val)
+	if err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "license_id", err)
+	}
+
+	msg, err := client.RemoveLicenseV1(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
+	return msg, metadata, err
+
+}
+
+func local_request_LicLicenseApiService_RemoveLicenseV1_0(ctx context.Context, marshaler runtime.Marshaler, server LicLicenseApiServiceServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+	var protoReq RemoveLicenseV1Request
+	var metadata runtime.ServerMetadata
+
+	var (
+		val string
+		ok  bool
+		err error
+		_   = err
+	)
+
+	val, ok = pathParams["license_id"]
+	if !ok {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "license_id")
+	}
+
+	protoReq.LicenseId, err = runtime.Uint64(val)
+	if err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "license_id", err)
+	}
+
+	msg, err := server.RemoveLicenseV1(ctx, &protoReq)
+	return msg, metadata, err
+
+}
+
+// RegisterLicLicenseApiServiceHandlerServer registers the http handlers for service LicLicenseApiService to "mux".
+// UnaryRPC     :call LicLicenseApiServiceServer directly.
 // StreamingRPC :currently unsupported pending https://github.com/grpc/grpc-go/issues/906.
-// Note that using this registration option will cause many gRPC library features to stop working. Consider using RegisterOmpTemplateApiServiceHandlerFromEndpoint instead.
-func RegisterOmpTemplateApiServiceHandlerServer(ctx context.Context, mux *runtime.ServeMux, server OmpTemplateApiServiceServer) error {
+// Note that using this registration option will cause many gRPC library features to stop working. Consider using RegisterLicLicenseApiServiceHandlerFromEndpoint instead.
+func RegisterLicLicenseApiServiceHandlerServer(ctx context.Context, mux *runtime.ServeMux, server LicLicenseApiServiceServer) error {
 
-	mux.Handle("GET", pattern_OmpTemplateApiService_DescribeTemplateV1_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("POST", pattern_LicLicenseApiService_CreateLicenseV1_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/ozonmp.lic_license_api.v1.OmpTemplateApiService/DescribeTemplateV1", runtime.WithHTTPPathPattern("/v1/templates/{template_id}"))
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/ozonmp.lic_license_api.v1.LicLicenseApiService/CreateLicenseV1", runtime.WithHTTPPathPattern("/v1/licenses"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := local_request_OmpTemplateApiService_DescribeTemplateV1_0(rctx, inboundMarshaler, server, req, pathParams)
+		resp, md, err := local_request_LicLicenseApiService_CreateLicenseV1_0(rctx, inboundMarshaler, server, req, pathParams)
 		md.HeaderMD, md.TrailerMD = metadata.Join(md.HeaderMD, stream.Header()), metadata.Join(md.TrailerMD, stream.Trailer())
 		ctx = runtime.NewServerMetadataContext(ctx, md)
 		if err != nil {
@@ -108,16 +212,85 @@ func RegisterOmpTemplateApiServiceHandlerServer(ctx context.Context, mux *runtim
 			return
 		}
 
-		forward_OmpTemplateApiService_DescribeTemplateV1_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_LicLicenseApiService_CreateLicenseV1_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+
+	})
+
+	mux.Handle("GET", pattern_LicLicenseApiService_DescribeLicenseV1_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+		ctx, cancel := context.WithCancel(req.Context())
+		defer cancel()
+		var stream runtime.ServerTransportStream
+		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
+		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/ozonmp.lic_license_api.v1.LicLicenseApiService/DescribeLicenseV1", runtime.WithHTTPPathPattern("/v1/licenses/{license_id}"))
+		if err != nil {
+			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
+			return
+		}
+		resp, md, err := local_request_LicLicenseApiService_DescribeLicenseV1_0(rctx, inboundMarshaler, server, req, pathParams)
+		md.HeaderMD, md.TrailerMD = metadata.Join(md.HeaderMD, stream.Header()), metadata.Join(md.TrailerMD, stream.Trailer())
+		ctx = runtime.NewServerMetadataContext(ctx, md)
+		if err != nil {
+			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
+			return
+		}
+
+		forward_LicLicenseApiService_DescribeLicenseV1_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+
+	})
+
+	mux.Handle("GET", pattern_LicLicenseApiService_ListLicenseV1_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+		ctx, cancel := context.WithCancel(req.Context())
+		defer cancel()
+		var stream runtime.ServerTransportStream
+		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
+		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/ozonmp.lic_license_api.v1.LicLicenseApiService/ListLicenseV1", runtime.WithHTTPPathPattern("/v1/licenses"))
+		if err != nil {
+			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
+			return
+		}
+		resp, md, err := local_request_LicLicenseApiService_ListLicenseV1_0(rctx, inboundMarshaler, server, req, pathParams)
+		md.HeaderMD, md.TrailerMD = metadata.Join(md.HeaderMD, stream.Header()), metadata.Join(md.TrailerMD, stream.Trailer())
+		ctx = runtime.NewServerMetadataContext(ctx, md)
+		if err != nil {
+			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
+			return
+		}
+
+		forward_LicLicenseApiService_ListLicenseV1_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+
+	})
+
+	mux.Handle("GET", pattern_LicLicenseApiService_RemoveLicenseV1_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+		ctx, cancel := context.WithCancel(req.Context())
+		defer cancel()
+		var stream runtime.ServerTransportStream
+		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
+		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/ozonmp.lic_license_api.v1.LicLicenseApiService/RemoveLicenseV1", runtime.WithHTTPPathPattern("/v1/licenses/{license_id}"))
+		if err != nil {
+			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
+			return
+		}
+		resp, md, err := local_request_LicLicenseApiService_RemoveLicenseV1_0(rctx, inboundMarshaler, server, req, pathParams)
+		md.HeaderMD, md.TrailerMD = metadata.Join(md.HeaderMD, stream.Header()), metadata.Join(md.TrailerMD, stream.Trailer())
+		ctx = runtime.NewServerMetadataContext(ctx, md)
+		if err != nil {
+			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
+			return
+		}
+
+		forward_LicLicenseApiService_RemoveLicenseV1_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 
 	})
 
 	return nil
 }
 
-// RegisterOmpTemplateApiServiceHandlerFromEndpoint is same as RegisterOmpTemplateApiServiceHandler but
+// RegisterLicLicenseApiServiceHandlerFromEndpoint is same as RegisterLicLicenseApiServiceHandler but
 // automatically dials to "endpoint" and closes the connection when "ctx" gets done.
-func RegisterOmpTemplateApiServiceHandlerFromEndpoint(ctx context.Context, mux *runtime.ServeMux, endpoint string, opts []grpc.DialOption) (err error) {
+func RegisterLicLicenseApiServiceHandlerFromEndpoint(ctx context.Context, mux *runtime.ServeMux, endpoint string, opts []grpc.DialOption) (err error) {
 	conn, err := grpc.Dial(endpoint, opts...)
 	if err != nil {
 		return err
@@ -137,39 +310,99 @@ func RegisterOmpTemplateApiServiceHandlerFromEndpoint(ctx context.Context, mux *
 		}()
 	}()
 
-	return RegisterOmpTemplateApiServiceHandler(ctx, mux, conn)
+	return RegisterLicLicenseApiServiceHandler(ctx, mux, conn)
 }
 
-// RegisterOmpTemplateApiServiceHandler registers the http handlers for service OmpTemplateApiService to "mux".
+// RegisterLicLicenseApiServiceHandler registers the http handlers for service LicLicenseApiService to "mux".
 // The handlers forward requests to the grpc endpoint over "conn".
-func RegisterOmpTemplateApiServiceHandler(ctx context.Context, mux *runtime.ServeMux, conn *grpc.ClientConn) error {
-	return RegisterOmpTemplateApiServiceHandlerClient(ctx, mux, NewOmpTemplateApiServiceClient(conn))
+func RegisterLicLicenseApiServiceHandler(ctx context.Context, mux *runtime.ServeMux, conn *grpc.ClientConn) error {
+	return RegisterLicLicenseApiServiceHandlerClient(ctx, mux, NewLicLicenseApiServiceClient(conn))
 }
 
-// RegisterOmpTemplateApiServiceHandlerClient registers the http handlers for service OmpTemplateApiService
-// to "mux". The handlers forward requests to the grpc endpoint over the given implementation of "OmpTemplateApiServiceClient".
-// Note: the gRPC framework executes interceptors within the gRPC handler. If the passed in "OmpTemplateApiServiceClient"
+// RegisterLicLicenseApiServiceHandlerClient registers the http handlers for service LicLicenseApiService
+// to "mux". The handlers forward requests to the grpc endpoint over the given implementation of "LicLicenseApiServiceClient".
+// Note: the gRPC framework executes interceptors within the gRPC handler. If the passed in "LicLicenseApiServiceClient"
 // doesn't go through the normal gRPC flow (creating a gRPC client etc.) then it will be up to the passed in
-// "OmpTemplateApiServiceClient" to call the correct interceptors.
-func RegisterOmpTemplateApiServiceHandlerClient(ctx context.Context, mux *runtime.ServeMux, client OmpTemplateApiServiceClient) error {
+// "LicLicenseApiServiceClient" to call the correct interceptors.
+func RegisterLicLicenseApiServiceHandlerClient(ctx context.Context, mux *runtime.ServeMux, client LicLicenseApiServiceClient) error {
 
-	mux.Handle("GET", pattern_OmpTemplateApiService_DescribeTemplateV1_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("POST", pattern_LicLicenseApiService_CreateLicenseV1_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/ozonmp.lic_license_api.v1.OmpTemplateApiService/DescribeTemplateV1", runtime.WithHTTPPathPattern("/v1/templates/{template_id}"))
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/ozonmp.lic_license_api.v1.LicLicenseApiService/CreateLicenseV1", runtime.WithHTTPPathPattern("/v1/licenses"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := request_OmpTemplateApiService_DescribeTemplateV1_0(rctx, inboundMarshaler, client, req, pathParams)
+		resp, md, err := request_LicLicenseApiService_CreateLicenseV1_0(rctx, inboundMarshaler, client, req, pathParams)
 		ctx = runtime.NewServerMetadataContext(ctx, md)
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
 
-		forward_OmpTemplateApiService_DescribeTemplateV1_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_LicLicenseApiService_CreateLicenseV1_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+
+	})
+
+	mux.Handle("GET", pattern_LicLicenseApiService_DescribeLicenseV1_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+		ctx, cancel := context.WithCancel(req.Context())
+		defer cancel()
+		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/ozonmp.lic_license_api.v1.LicLicenseApiService/DescribeLicenseV1", runtime.WithHTTPPathPattern("/v1/licenses/{license_id}"))
+		if err != nil {
+			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
+			return
+		}
+		resp, md, err := request_LicLicenseApiService_DescribeLicenseV1_0(rctx, inboundMarshaler, client, req, pathParams)
+		ctx = runtime.NewServerMetadataContext(ctx, md)
+		if err != nil {
+			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
+			return
+		}
+
+		forward_LicLicenseApiService_DescribeLicenseV1_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+
+	})
+
+	mux.Handle("GET", pattern_LicLicenseApiService_ListLicenseV1_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+		ctx, cancel := context.WithCancel(req.Context())
+		defer cancel()
+		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/ozonmp.lic_license_api.v1.LicLicenseApiService/ListLicenseV1", runtime.WithHTTPPathPattern("/v1/licenses"))
+		if err != nil {
+			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
+			return
+		}
+		resp, md, err := request_LicLicenseApiService_ListLicenseV1_0(rctx, inboundMarshaler, client, req, pathParams)
+		ctx = runtime.NewServerMetadataContext(ctx, md)
+		if err != nil {
+			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
+			return
+		}
+
+		forward_LicLicenseApiService_ListLicenseV1_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+
+	})
+
+	mux.Handle("GET", pattern_LicLicenseApiService_RemoveLicenseV1_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+		ctx, cancel := context.WithCancel(req.Context())
+		defer cancel()
+		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/ozonmp.lic_license_api.v1.LicLicenseApiService/RemoveLicenseV1", runtime.WithHTTPPathPattern("/v1/licenses/{license_id}"))
+		if err != nil {
+			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
+			return
+		}
+		resp, md, err := request_LicLicenseApiService_RemoveLicenseV1_0(rctx, inboundMarshaler, client, req, pathParams)
+		ctx = runtime.NewServerMetadataContext(ctx, md)
+		if err != nil {
+			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
+			return
+		}
+
+		forward_LicLicenseApiService_RemoveLicenseV1_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 
 	})
 
@@ -177,9 +410,21 @@ func RegisterOmpTemplateApiServiceHandlerClient(ctx context.Context, mux *runtim
 }
 
 var (
-	pattern_OmpTemplateApiService_DescribeTemplateV1_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2}, []string{"v1", "templates", "template_id"}, ""))
+	pattern_LicLicenseApiService_CreateLicenseV1_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "licenses"}, ""))
+
+	pattern_LicLicenseApiService_DescribeLicenseV1_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2}, []string{"v1", "licenses", "license_id"}, ""))
+
+	pattern_LicLicenseApiService_ListLicenseV1_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "licenses"}, ""))
+
+	pattern_LicLicenseApiService_RemoveLicenseV1_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2}, []string{"v1", "licenses", "license_id"}, ""))
 )
 
 var (
-	forward_OmpTemplateApiService_DescribeTemplateV1_0 = runtime.ForwardResponseMessage
+	forward_LicLicenseApiService_CreateLicenseV1_0 = runtime.ForwardResponseMessage
+
+	forward_LicLicenseApiService_DescribeLicenseV1_0 = runtime.ForwardResponseMessage
+
+	forward_LicLicenseApiService_ListLicenseV1_0 = runtime.ForwardResponseMessage
+
+	forward_LicLicenseApiService_RemoveLicenseV1_0 = runtime.ForwardResponseMessage
 )
