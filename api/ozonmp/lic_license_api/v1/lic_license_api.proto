@@ -1,12 +1,12 @@
 syntax = "proto3";
 
-package ozonmp.omp_template_api.v1;
+package ozonmp.lic_license_api.v1;
 
 import "validate/validate.proto";
 import "google/api/annotations.proto";
 import "google/protobuf/timestamp.proto";
 
-option go_package = "github.com/ozonmp/omp-template-api/pkg/omp-template-api;omp_template_api";
+option go_package = "github.com/ozonmp/lic-license-api/pkg/lic-license-api";
 
 // OmpTemplateApiService - Service for working with templates
 service OmpTemplateApiService {
