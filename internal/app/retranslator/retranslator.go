@@ -2,12 +2,12 @@ package retranslator
 
 import (
 	"context"
+	"github.com/gammazero/workerpool"
 	"github.com/ozonmp/lic-license-api/internal/app/consumer"
 	"github.com/ozonmp/lic-license-api/internal/app/producer"
 	"github.com/ozonmp/lic-license-api/internal/app/repo"
 	"github.com/ozonmp/lic-license-api/internal/app/sender"
-	workerpool "github.com/ozonmp/lic-license-api/internal/app/worker_pool"
-	"github.com/ozonmp/lic-license-api/internal/model/license"
+	"github.com/ozonmp/lic-license-api/internal/model"
 	"time"
 )
 
@@ -31,14 +31,16 @@ type Config struct {
 }
 
 type retranslator struct {
-	events   chan license.LicenseEvent
-	consumer consumer.LicenseConsumer
-	producer producer.LicenseProducer
-	cancel   context.CancelFunc
+	events     chan model.LicenseEvent
+	consumer   consumer.LicenseConsumer
+	producer   producer.LicenseProducer
+	workerPool *workerpool.WorkerPool
+	//cancel   context.CancelFunc
 }
 
 func NewRetranslator(cfg Config) Retranslator {
-	events := make(chan license.LicenseEvent, cfg.ChannelSize)
+	events := make(chan model.LicenseEvent, cfg.ChannelSize)
+	workerPool := workerpool.New(cfg.WorkerCount)
 
 	consumer := consumer.NewLicenseDbConsumer(
 		cfg.ConsumerCount,
@@ -50,12 +52,15 @@ func NewRetranslator(cfg Config) Retranslator {
 		cfg.ProducerCount,
 		cfg.Sender,
 		events,
-		workerpool.NewWorkerLicPool(cfg.WorkerCount, cfg.Repo))
+		workerPool,
+		cfg.Repo,
+	)
 
 	return &retranslator{
-		events:   events,
-		consumer: consumer,
-		producer: producer,
+		events:     events,
+		consumer:   consumer,
+		producer:   producer,
+		workerPool: workerPool,
 	}
 }
 

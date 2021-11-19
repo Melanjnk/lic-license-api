@@ -2,35 +2,73 @@ package retranslator
 
 import (
 	"context"
-	"github.com/ozonmp/lic-license-api/internal/mocks"
-	"testing"
-	"time"
-
+	"errors"
 	"github.com/golang/mock/gomock"
+	"github.com/ozonmp/lic-license-api/internal/mocks"
+	"github.com/ozonmp/lic-license-api/internal/model"
+	"github.com/stretchr/testify/suite"
+	"time"
 )
 
-func TestStart(t *testing.T) {
+type RetranslatorTestSuite struct {
+	suite.Suite
+	mockCtrl     *gomock.Controller
+	repo         *mocks.MockLicenseEventRepo
+	sender       *mocks.MockLicenseEventSender
+	cfg          Config
+	retranslator Retranslator
+}
 
-	ctrl := gomock.NewController(t)
-	repo := mocks.MockLicenseEventRepo(ctrl)
-	sender := mocks.NewMockLicenseEventSender(ctrl)
+func (suite *RetranslatorTestSuite) SetupTest() {
+	suite.mockCtrl = gomock.NewController(suite.T())
+	suite.repo = mocks.NewMockLicenseEventRepo(suite.mockCtrl)
+	suite.sender = mocks.NewMockLicenseEventSender(suite.mockCtrl)
+	suite.cfg = Config{
+		ChannelSize:    512,
+		ConsumerCount:  1,
+		ConsumeSize:    10,
+		ConsumeTimeout: time.Millisecond * 500,
+		ProducerCount:  1,
+		WorkerCount:    1,
+		Repo:           suite.repo,
+		Sender:         suite.sender,
+	}
+	suite.retranslator = NewRetranslator(suite.cfg)
+}
 
-	repo.EXPECT().Lock(gomock.Any()).AnyTimes()
+func (suite *RetranslatorTestSuite) TearDownTest() {
+	suite.retranslator.Close()
+	suite.mockCtrl.Finish()
+}
+
+func (suite *RetranslatorTestSuite) TestStart() {
 	ctx, cancel := context.WithCancel(context.Background())
 	defer cancel()
 
-	cfg := Config{
-		ChannelSize:    512,
-		ConsumerCount:  2,
-		ConsumeSize:    10,
-		ConsumeTimeout: 10 * time.Second,
-		ProducerCount:  2,
-		WorkerCount:    2,
-		Repo:           repo,
-		Sender:         sender,
-	}
+	suite.repo.EXPECT().Lock(gomock.Any()).AnyTimes()
+	suite.retranslator.Start(ctx)
+}
 
-	retranslator := NewRetranslator(cfg)
-	retranslator.Start(ctx)
-	retranslator.Close()
+func (suite *RetranslatorTestSuite) TestPubSub() {
+	ctx, cancel := context.WithCancel(context.Background())
+	defer cancel()
+	lockEvents := []model.LicenseEvent{
+		{
+			ID:     1,
+			Type:   model.Created,
+			Status: model.Deferred,
+			Entity: nil,
+		},
+	}
+	// clean
+	suite.repo.EXPECT().Lock(gomock.Any()).Return(lockEvents, nil).Times(1)
+	suite.sender.EXPECT().Send(gomock.Any()).Return(nil).Times(1)
+	suite.repo.EXPECT().Remove(gomock.Any()).Times(1)
+
+	// update
+	suite.repo.EXPECT().Lock(gomock.Any()).Return(lockEvents, nil).Times(1)
+	suite.sender.EXPECT().Send(gomock.Any()).Return(errors.New("test error")).Times(1)
+	suite.repo.EXPECT().Unlock(gomock.Any()).Times(1)
+
+	suite.retranslator.Start(ctx)
 }

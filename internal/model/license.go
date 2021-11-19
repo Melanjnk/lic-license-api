@@ -1,4 +1,4 @@
-package license
+package model
 
 type License struct {
 	ID    uint64
