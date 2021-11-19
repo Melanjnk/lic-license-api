@@ -7,7 +7,7 @@ import (
 	"github.com/ozonmp/lic-license-api/internal/app/producer"
 	"github.com/ozonmp/lic-license-api/internal/app/repo"
 	"github.com/ozonmp/lic-license-api/internal/app/sender"
-	"github.com/ozonmp/lic-license-api/internal/model/license"
+	"github.com/ozonmp/lic-license-api/internal/model"
 	"time"
 )
 
@@ -31,7 +31,7 @@ type Config struct {
 }
 
 type retranslator struct {
-	events     chan license.LicenseEvent
+	events     chan model.LicenseEvent
 	consumer   consumer.LicenseConsumer
 	producer   producer.LicenseProducer
 	workerPool *workerpool.WorkerPool
@@ -39,7 +39,7 @@ type retranslator struct {
 }
 
 func NewRetranslator(cfg Config) Retranslator {
-	events := make(chan license.LicenseEvent, cfg.ChannelSize)
+	events := make(chan model.LicenseEvent, cfg.ChannelSize)
 	workerPool := workerpool.New(cfg.WorkerCount)
 
 	consumer := consumer.NewLicenseDbConsumer(

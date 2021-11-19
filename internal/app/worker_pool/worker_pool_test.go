@@ -3,7 +3,7 @@ package workerpool
 import (
 	"github.com/ozonmp/lic-license-api/internal/app/repo"
 	"github.com/ozonmp/lic-license-api/internal/mocks"
-	"github.com/ozonmp/lic-license-api/internal/model/license"
+	"github.com/ozonmp/lic-license-api/internal/model"
 	"testing"
 
 	"github.com/golang/mock/gomock"
@@ -40,11 +40,11 @@ func TestCleanCreatedType(t *testing.T) {
 	ctrl := gomock.NewController(t)
 	repo := mocks.NewMockLicenseEventRepo(ctrl)
 
-	event := license.LicenseEvent{
+	event := model.LicenseEvent{
 		ID:     1,
-		Type:   license.Created,
-		Status: license.Processed,
-		Entity: &license.License{
+		Type:   model.Created,
+		Status: model.Processed,
+		Entity: &model.License{
 			ID: 1,
 		},
 	}
@@ -70,25 +70,25 @@ func TestCleanNotCreatedType(t *testing.T) {
 	ctrl := gomock.NewController(t)
 	repo := mocks.NewMockLicenseEventRepo(ctrl)
 
-	checkCleanNotCreatedType(repo, license.LicenseEvent{
+	checkCleanNotCreatedType(repo, model.LicenseEvent{
 		ID:     1,
-		Type:   license.Updated,
-		Status: license.Processed,
-		Entity: &license.License{
+		Type:   model.Updated,
+		Status: model.Processed,
+		Entity: &model.License{
 			ID: 1,
 		},
 	}, t)
-	checkCleanNotCreatedType(repo, license.LicenseEvent{
+	checkCleanNotCreatedType(repo, model.LicenseEvent{
 		ID:     1,
-		Type:   license.Removed,
-		Status: license.Processed,
-		Entity: &license.License{
+		Type:   model.Removed,
+		Status: model.Processed,
+		Entity: &model.License{
 			ID: 1,
 		},
 	}, t)
 }
 
-func checkCleanNotCreatedType(repo *mocks.MockLicenseEventRepo, event license.LicenseEvent, t *testing.T) {
+func checkCleanNotCreatedType(repo *mocks.MockLicenseEventRepo, event model.LicenseEvent, t *testing.T) {
 	repo.EXPECT().Remove([]uint64{event.ID}).Return(nil).Times(0)
 
 	wp := RetranslatorWorkerLicPool{
@@ -112,11 +112,11 @@ func TestUpdateCreatedType(t *testing.T) {
 	ctrl := gomock.NewController(t)
 	repo := mocks.NewMockLicenseEventRepo(ctrl)
 
-	event := license.LicenseEvent{
+	event := model.LicenseEvent{
 		ID:     1,
-		Type:   license.Created,
-		Status: license.Processed,
-		Entity: &license.License{
+		Type:   model.Created,
+		Status: model.Processed,
+		Entity: &model.License{
 			ID: 1,
 		},
 	}
@@ -143,25 +143,25 @@ func TestUpdateNotCreatedType(t *testing.T) {
 	ctrl := gomock.NewController(t)
 	repo := mocks.NewMockLicenseEventRepo(ctrl)
 
-	checkUpdateNotCreatedType(repo, license.LicenseEvent{
+	checkUpdateNotCreatedType(repo, model.LicenseEvent{
 		ID:     1,
-		Type:   license.Updated,
-		Status: license.Processed,
-		Entity: &license.License{
+		Type:   model.Updated,
+		Status: model.Processed,
+		Entity: &model.License{
 			ID: 1,
 		},
 	}, t)
-	checkUpdateNotCreatedType(repo, license.LicenseEvent{
+	checkUpdateNotCreatedType(repo, model.LicenseEvent{
 		ID:     1,
-		Type:   license.Removed,
-		Status: license.Processed,
-		Entity: &license.License{
+		Type:   model.Removed,
+		Status: model.Processed,
+		Entity: &model.License{
 			ID: 1,
 		},
 	}, t)
 }
 
-func checkUpdateNotCreatedType(repo *mocks.MockLicenseEventRepo, event license.LicenseEvent, t *testing.T) {
+func checkUpdateNotCreatedType(repo *mocks.MockLicenseEventRepo, event model.LicenseEvent, t *testing.T) {
 	repo.EXPECT().Unlock([]uint64{event.ID}).Return(nil).Times(0)
 
 	wp := RetranslatorWorkerLicPool{

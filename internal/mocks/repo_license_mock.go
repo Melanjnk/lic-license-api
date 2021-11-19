@@ -5,10 +5,10 @@
 package mocks
 
 import (
+	license "github.com/ozonmp/lic-license-api/internal/model"
 	reflect "reflect"
 
 	gomock "github.com/golang/mock/gomock"
-	license "github.com/ozonmp/lic-license-api/internal/model/license"
 )
 
 // MockLicenseEventRepo is a mock of LicenseEventRepo interface.

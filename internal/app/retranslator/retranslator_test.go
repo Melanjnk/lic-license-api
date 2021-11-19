@@ -5,7 +5,7 @@ import (
 	"errors"
 	"github.com/golang/mock/gomock"
 	"github.com/ozonmp/lic-license-api/internal/mocks"
-	"github.com/ozonmp/lic-license-api/internal/model/license"
+	"github.com/ozonmp/lic-license-api/internal/model"
 	"github.com/stretchr/testify/suite"
 	"time"
 )
@@ -52,11 +52,11 @@ func (suite *RetranslatorTestSuite) TestStart() {
 func (suite *RetranslatorTestSuite) TestPubSub() {
 	ctx, cancel := context.WithCancel(context.Background())
 	defer cancel()
-	lockEvents := []license.LicenseEvent{
+	lockEvents := []model.LicenseEvent{
 		{
 			ID:     1,
-			Type:   license.Created,
-			Status: license.Deferred,
+			Type:   model.Created,
+			Status: model.Deferred,
 			Entity: nil,
 		},
 	}
