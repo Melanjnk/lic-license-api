@@ -5,9 +5,8 @@ import (
 	"github.com/gammazero/workerpool"
 	"github.com/ozonmp/lic-license-api/internal/app/repo"
 	"github.com/ozonmp/lic-license-api/internal/app/sender"
+	"github.com/ozonmp/lic-license-api/internal/model"
 
-	//workerpool "github.com/ozonmp/lic-license-api/internal/app/worker_pool"
-	"github.com/ozonmp/lic-license-api/internal/model/license"
 	"sync"
 )
 
@@ -22,7 +21,7 @@ type licenseProducer struct {
 	sender     sender.LicenseEventSender
 	workerPool *workerpool.WorkerPool //WorkerLicPool
 	repo       repo.LicenseEventRepo
-	events     <-chan license.LicenseEvent
+	events     <-chan model.LicenseEvent
 	wg         *sync.WaitGroup
 	done       chan bool
 }
@@ -30,7 +29,7 @@ type licenseProducer struct {
 func NewKafkaLicenseProducer(
 	workerCount uint64,
 	sender sender.LicenseEventSender,
-	events <-chan license.LicenseEvent,
+	events <-chan model.LicenseEvent,
 	workerPool *workerpool.WorkerPool,
 	repo repo.LicenseEventRepo,
 ) LicenseProducer {
@@ -49,7 +48,7 @@ func NewKafkaLicenseProducer(
 	}
 }
 
-func (p *licenseProducer) produceEvent(event license.LicenseEvent) {
+func (p *licenseProducer) produceEvent(event model.LicenseEvent) {
 	if err := p.sender.Send(&event); err != nil {
 		// update
 		p.workerPool.Submit(func() {

@@ -3,11 +3,11 @@ package producer
 import (
 	"context"
 	"errors"
+	"github.com/ozonmp/lic-license-api/internal/model"
 
 	"github.com/gammazero/workerpool"
 	"github.com/golang/mock/gomock"
 	"github.com/ozonmp/lic-license-api/internal/mocks"
-	"github.com/ozonmp/lic-license-api/internal/model/license"
 	"github.com/stretchr/testify/suite"
 )
 
@@ -17,7 +17,7 @@ type ProducerTestSuite struct {
 	sender         *mocks.MockLicenseEventSender
 	repo           *mocks.MockLicenseEventRepo
 	producerCount  uint64
-	events         chan license.LicenseEvent
+	events         chan model.LicenseEvent
 	workerPoolSize int
 	workerPool     *workerpool.WorkerPool
 	producer       LicenseProducer
@@ -28,7 +28,7 @@ func (suite *ProducerTestSuite) SetupTest() {
 	suite.sender = mocks.NewMockLicenseEventSender(suite.mockCtrl)
 	suite.repo = mocks.NewMockLicenseEventRepo(suite.mockCtrl)
 	suite.producerCount = uint64(1)
-	suite.events = make(chan license.LicenseEvent)
+	suite.events = make(chan model.LicenseEvent)
 	suite.workerPoolSize = 1
 	suite.workerPool = workerpool.New(suite.workerPoolSize)
 	suite.producer = NewKafkaLicenseProducer(
@@ -66,10 +66,10 @@ func (suite *ProducerTestSuite) TestEventChanRead() {
 	suite.sender.EXPECT().Send(gomock.Any()).Return(errors.New("test error")).Times(1)
 	suite.repo.EXPECT().Unlock(gomock.Any())
 
-	testEvent := license.LicenseEvent{
+	testEvent := model.LicenseEvent{
 		ID:     1,
-		Type:   license.Created,
-		Status: license.Deferred,
+		Type:   model.Created,
+		Status: model.Deferred,
 		Entity: nil,
 	}
 	suite.events <- testEvent

@@ -3,7 +3,7 @@ package consumer
 import (
 	"context"
 	"github.com/ozonmp/lic-license-api/internal/app/repo"
-	"github.com/ozonmp/lic-license-api/internal/model/license"
+	"github.com/ozonmp/lic-license-api/internal/model"
 	"sync"
 	"time"
 )
@@ -15,7 +15,7 @@ type LicenseConsumer interface {
 
 type licenseConsumer struct {
 	n      uint64
-	events chan<- license.LicenseEvent
+	events chan<- model.LicenseEvent
 
 	repo repo.LicenseEventRepo
 
@@ -28,7 +28,7 @@ type licenseConsumer struct {
 
 type LicenseConfig struct {
 	n         uint64
-	events    chan<- license.LicenseEvent
+	events    chan<- model.LicenseEvent
 	repo      repo.LicenseEventRepo
 	batchSize uint64
 	timeout   time.Duration
@@ -39,7 +39,7 @@ func NewLicenseDbConsumer(
 	batchSize uint64,
 	consumeTimeout time.Duration,
 	repo repo.LicenseEventRepo,
-	events chan<- license.LicenseEvent) LicenseConsumer {
+	events chan<- model.LicenseEvent) LicenseConsumer {
 
 	wg := &sync.WaitGroup{}
 

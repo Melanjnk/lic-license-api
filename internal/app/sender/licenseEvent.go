@@ -1,9 +1,9 @@
 package sender
 
 import (
-	"github.com/ozonmp/lic-license-api/internal/model/license"
+	"github.com/ozonmp/lic-license-api/internal/model"
 )
 
 type LicenseEventSender interface {
-	Send(license *license.LicenseEvent) error
+	Send(license *model.LicenseEvent) error
 }
