@@ -64,7 +64,7 @@ message ListLicenseV1Request {
 }
 
 message ListLicenseV1Response {
-  repeated License license = 1;
+  repeated License licenses = 1;
 }
 
 

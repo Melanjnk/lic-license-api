@@ -1,4 +1,4 @@
-# Ozon Marketplace Template API
+# Ozon Marketplace License API
 
 ---
 
@@ -41,9 +41,9 @@ The Swagger UI is an open source project to visually render documentation for an
 - http://localhost:8082
 
 ```sh
-[I] ➜ grpc_cli call localhost:8082 DescribeTemplateV1 "id: 1"
+[I] ➜ grpc_cli call localhost:8082 DescribeLicenseV1 "id: 1"
 connecting to localhost:8082
-Rpc failed with status code 5, error message: template not found
+Rpc failed with status code 5, error message: license not found
 ```
 
 ### Gateway:
@@ -54,7 +54,7 @@ It reads protobuf service definitions and generates a reverse-proxy server which
 
 ```sh
 [I] ➜ curl -s -X 'POST' \
-  'http://localhost:8080/v1/templates' \
+  'http://localhost:8080/v1/licences' \
   -H 'accept: application/json' \
   -H 'Content-Type: application/json' \
   -d '{
@@ -62,7 +62,7 @@ It reads protobuf service definitions and generates a reverse-proxy server which
 }' | jq .
 {
   "code": 5,
-  "message": "template not found",
+  "message": "license not found",
   "details": []
 }
 ```

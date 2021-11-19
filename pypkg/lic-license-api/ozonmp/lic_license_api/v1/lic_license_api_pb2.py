@@ -22,7 +22,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   syntax='proto3',
   serialized_options=b'Z5github.com/ozonmp/lic-license-api/pkg/lic-license-api',
   create_key=_descriptor._internal_create_key,
-  serialized_pb=b'\n/ozonmp/lic_license_api/v1/lic_license_api.proto\x12\x19ozonmp.lic_license_api.v1\x1a\x17validate/validate.proto\x1a\x1cgoogle/api/annotations.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"t\n\x07License\x12\x1d\n\nlicense_id\x18\x01 \x01(\x04R\tlicenseId\x12\x14\n\x05title\x18\x02 \x01(\x04R\x05title\x12\x34\n\x07\x63reated\x18\x03 \x01(\x0b\x32\x1a.google.protobuf.TimestampR\x07\x63reated\"b\n\x16\x43reateLicenseV1Request\x12&\n\nlicense_id\x18\x01 \x01(\x04\x42\x07\xfa\x42\x04\x32\x02 \x00R\tlicenseId\x12 \n\x05title\x18\x02 \x01(\tB\n\xfa\x42\x07r\x05\x10\x01\x18\x96\x01R\x05title\"8\n\x17\x43reateLicenseV1Response\x12\x1d\n\nlicense_id\x18\x01 \x01(\x04R\tlicenseId\"B\n\x18\x44\x65scribeLicenseV1Request\x12&\n\nlicense_id\x18\x01 \x01(\x04\x42\x07\xfa\x42\x04\x32\x02 \x00R\tlicenseId\"Y\n\x19\x44\x65scribeLicenseV1Response\x12<\n\x07license\x18\x01 \x01(\x0b\x32\".ozonmp.lic_license_api.v1.LicenseR\x07license\"\x16\n\x14ListLicenseV1Request\"U\n\x15ListLicenseV1Response\x12<\n\x07license\x18\x01 \x03(\x0b\x32\".ozonmp.lic_license_api.v1.LicenseR\x07license\"@\n\x16RemoveLicenseV1Request\x12&\n\nlicense_id\x18\x01 \x01(\x04\x42\x07\xfa\x42\x04\x32\x02 \x00R\tlicenseId\"/\n\x17RemoveLicenseV1Response\x12\x14\n\x05\x66ound\x18\x01 \x01(\x08R\x05\x66ound2\xf7\x04\n\x14LicLicenseApiService\x12\x91\x01\n\x0f\x43reateLicenseV1\x12\x31.ozonmp.lic_license_api.v1.CreateLicenseV1Request\x1a\x32.ozonmp.lic_license_api.v1.CreateLicenseV1Response\"\x17\x82\xd3\xe4\x93\x02\x11\"\x0c/v1/licenses:\x01*\x12\xa1\x01\n\x11\x44\x65scribeLicenseV1\x12\x33.ozonmp.lic_license_api.v1.DescribeLicenseV1Request\x1a\x34.ozonmp.lic_license_api.v1.DescribeLicenseV1Response\"!\x82\xd3\xe4\x93\x02\x1b\x12\x19/v1/licenses/{license_id}\x12\x88\x01\n\rListLicenseV1\x12/.ozonmp.lic_license_api.v1.ListLicenseV1Request\x1a\x30.ozonmp.lic_license_api.v1.ListLicenseV1Response\"\x14\x82\xd3\xe4\x93\x02\x0e\x12\x0c/v1/licenses\x12\x9b\x01\n\x0fRemoveLicenseV1\x12\x31.ozonmp.lic_license_api.v1.RemoveLicenseV1Request\x1a\x32.ozonmp.lic_license_api.v1.RemoveLicenseV1Response\"!\x82\xd3\xe4\x93\x02\x1b\x12\x19/v1/licenses/{license_id}B7Z5github.com/ozonmp/lic-license-api/pkg/lic-license-apib\x06proto3'
+  serialized_pb=b'\n/ozonmp/lic_license_api/v1/lic_license_api.proto\x12\x19ozonmp.lic_license_api.v1\x1a\x17validate/validate.proto\x1a\x1cgoogle/api/annotations.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"t\n\x07License\x12\x1d\n\nlicense_id\x18\x01 \x01(\x04R\tlicenseId\x12\x14\n\x05title\x18\x02 \x01(\x04R\x05title\x12\x34\n\x07\x63reated\x18\x03 \x01(\x0b\x32\x1a.google.protobuf.TimestampR\x07\x63reated\"b\n\x16\x43reateLicenseV1Request\x12&\n\nlicense_id\x18\x01 \x01(\x04\x42\x07\xfa\x42\x04\x32\x02 \x00R\tlicenseId\x12 \n\x05title\x18\x02 \x01(\tB\n\xfa\x42\x07r\x05\x10\x01\x18\x96\x01R\x05title\"8\n\x17\x43reateLicenseV1Response\x12\x1d\n\nlicense_id\x18\x01 \x01(\x04R\tlicenseId\"B\n\x18\x44\x65scribeLicenseV1Request\x12&\n\nlicense_id\x18\x01 \x01(\x04\x42\x07\xfa\x42\x04\x32\x02 \x00R\tlicenseId\"Y\n\x19\x44\x65scribeLicenseV1Response\x12<\n\x07license\x18\x01 \x01(\x0b\x32\".ozonmp.lic_license_api.v1.LicenseR\x07license\"\x16\n\x14ListLicenseV1Request\"W\n\x15ListLicenseV1Response\x12>\n\x08licenses\x18\x01 \x03(\x0b\x32\".ozonmp.lic_license_api.v1.LicenseR\x08licenses\"@\n\x16RemoveLicenseV1Request\x12&\n\nlicense_id\x18\x01 \x01(\x04\x42\x07\xfa\x42\x04\x32\x02 \x00R\tlicenseId\"/\n\x17RemoveLicenseV1Response\x12\x14\n\x05\x66ound\x18\x01 \x01(\x08R\x05\x66ound2\xf7\x04\n\x14LicLicenseApiService\x12\x91\x01\n\x0f\x43reateLicenseV1\x12\x31.ozonmp.lic_license_api.v1.CreateLicenseV1Request\x1a\x32.ozonmp.lic_license_api.v1.CreateLicenseV1Response\"\x17\x82\xd3\xe4\x93\x02\x11\"\x0c/v1/licenses:\x01*\x12\xa1\x01\n\x11\x44\x65scribeLicenseV1\x12\x33.ozonmp.lic_license_api.v1.DescribeLicenseV1Request\x1a\x34.ozonmp.lic_license_api.v1.DescribeLicenseV1Response\"!\x82\xd3\xe4\x93\x02\x1b\x12\x19/v1/licenses/{license_id}\x12\x88\x01\n\rListLicenseV1\x12/.ozonmp.lic_license_api.v1.ListLicenseV1Request\x1a\x30.ozonmp.lic_license_api.v1.ListLicenseV1Response\"\x14\x82\xd3\xe4\x93\x02\x0e\x12\x0c/v1/licenses\x12\x9b\x01\n\x0fRemoveLicenseV1\x12\x31.ozonmp.lic_license_api.v1.RemoveLicenseV1Request\x1a\x32.ozonmp.lic_license_api.v1.RemoveLicenseV1Response\"!\x82\xd3\xe4\x93\x02\x1b\x12\x19/v1/licenses/{license_id}B7Z5github.com/ozonmp/lic-license-api/pkg/lic-license-apib\x06proto3'
   ,
   dependencies=[validate_dot_validate__pb2.DESCRIPTOR,google_dot_api_dot_annotations__pb2.DESCRIPTOR,google_dot_protobuf_dot_timestamp__pb2.DESCRIPTOR,])
 
@@ -244,12 +244,12 @@ _LISTLICENSEV1RESPONSE = _descriptor.Descriptor(
   create_key=_descriptor._internal_create_key,
   fields=[
     _descriptor.FieldDescriptor(
-      name='license', full_name='ozonmp.lic_license_api.v1.ListLicenseV1Response.license', index=0,
+      name='licenses', full_name='ozonmp.lic_license_api.v1.ListLicenseV1Response.licenses', index=0,
       number=1, type=11, cpp_type=10, label=3,
       has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, json_name='license', file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+      serialized_options=None, json_name='licenses', file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
   ],
   extensions=[
   ],
@@ -263,7 +263,7 @@ _LISTLICENSEV1RESPONSE = _descriptor.Descriptor(
   oneofs=[
   ],
   serialized_start=625,
-  serialized_end=710,
+  serialized_end=712,
 )
 
 
@@ -294,8 +294,8 @@ _REMOVELICENSEV1REQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=712,
-  serialized_end=776,
+  serialized_start=714,
+  serialized_end=778,
 )
 
 
@@ -326,13 +326,13 @@ _REMOVELICENSEV1RESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=778,
-  serialized_end=825,
+  serialized_start=780,
+  serialized_end=827,
 )
 
 _LICENSE.fields_by_name['created'].message_type = google_dot_protobuf_dot_timestamp__pb2._TIMESTAMP
 _DESCRIBELICENSEV1RESPONSE.fields_by_name['license'].message_type = _LICENSE
-_LISTLICENSEV1RESPONSE.fields_by_name['license'].message_type = _LICENSE
+_LISTLICENSEV1RESPONSE.fields_by_name['licenses'].message_type = _LICENSE
 DESCRIPTOR.message_types_by_name['License'] = _LICENSE
 DESCRIPTOR.message_types_by_name['CreateLicenseV1Request'] = _CREATELICENSEV1REQUEST
 DESCRIPTOR.message_types_by_name['CreateLicenseV1Response'] = _CREATELICENSEV1RESPONSE
@@ -421,8 +421,8 @@ _LICLICENSEAPISERVICE = _descriptor.ServiceDescriptor(
   index=0,
   serialized_options=None,
   create_key=_descriptor._internal_create_key,
-  serialized_start=828,
-  serialized_end=1459,
+  serialized_start=830,
+  serialized_end=1461,
   methods=[
   _descriptor.MethodDescriptor(
     name='CreateLicenseV1',
