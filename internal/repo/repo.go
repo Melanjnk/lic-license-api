@@ -13,7 +13,7 @@ import (
 type Repo interface {
 	CreateLicense(ctx context.Context, license *model.License) (uint64, error)
 	DescribeLicense(ctx context.Context, licenseID uint64) (*model.License, error)
-	ListLicense(ctx context.Context, cursor uint64, limit uint64) ([]model.License, error)
+	ListLicense(ctx context.Context, cursor uint64, limit uint64) ([]*model.License, error)
 	RemoveLicense(ctx context.Context, licenseID uint64) (bool, error)
 }
 
@@ -35,7 +35,7 @@ func (r *repo) DescribeLicense(ctx context.Context, licenseID uint64) (*model.Li
 	return nil, errors.New("not implemented")
 }
 
-func (r *repo) ListLicense(ctx context.Context, cursor uint64, limit uint64) ([]model.License, error) {
+func (r *repo) ListLicense(ctx context.Context, cursor uint64, limit uint64) ([]*model.License, error) {
 	return nil, errors.New("not implemented")
 }
 

@@ -24,4 +24,7 @@ require (
 	gopkg.in/yaml.v3 v3.0.0-20210107192922-496545a6307b
 )
 
-replace github.com/ozonmp/lic-license-api/pkg/lic-license-api => ./pkg/lic-license-api
+replace (
+	github.com/ozonmp/lic-license-api/internal/mocks => ./internal/mocks
+	github.com/ozonmp/lic-license-api/pkg/lic-license-api => ./pkg/lic-license-api
+)

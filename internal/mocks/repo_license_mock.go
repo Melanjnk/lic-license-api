@@ -5,10 +5,10 @@
 package mocks
 
 import (
-	license "github.com/ozonmp/lic-license-api/internal/model"
 	reflect "reflect"
 
 	gomock "github.com/golang/mock/gomock"
+	model "github.com/ozonmp/lic-license-api/internal/model"
 )
 
 // MockLicenseEventRepo is a mock of LicenseEventRepo interface.
@@ -35,7 +35,7 @@ func (m *MockLicenseEventRepo) EXPECT() *MockLicenseEventRepoMockRecorder {
 }
 
 // Add mocks base method.
-func (m *MockLicenseEventRepo) Add(arg0 []license.LicenseEvent) error {
+func (m *MockLicenseEventRepo) Add(arg0 []model.LicenseEvent) error {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "Add", arg0)
 	ret0, _ := ret[0].(error)
@@ -49,10 +49,10 @@ func (mr *MockLicenseEventRepoMockRecorder) Add(arg0 interface{}) *gomock.Call {
 }
 
 // Lock mocks base method.
-func (m *MockLicenseEventRepo) Lock(arg0 uint64) ([]license.LicenseEvent, error) {
+func (m *MockLicenseEventRepo) Lock(arg0 uint64) ([]model.LicenseEvent, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "Lock", arg0)
-	ret0, _ := ret[0].([]license.LicenseEvent)
+	ret0, _ := ret[0].([]model.LicenseEvent)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
