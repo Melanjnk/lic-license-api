@@ -29,8 +29,9 @@ type License struct {
 	unknownFields protoimpl.UnknownFields
 
 	LicenseId uint64                 `protobuf:"varint,1,opt,name=license_id,json=licenseId,proto3" json:"license_id,omitempty"`
-	Title     uint64                 `protobuf:"varint,2,opt,name=title,proto3" json:"title,omitempty"`
-	Created   *timestamppb.Timestamp `protobuf:"bytes,3,opt,name=created,proto3" json:"created,omitempty"`
+	Title     string                 `protobuf:"varint,2,opt,name=title,proto3" json:"title,omitempty"`
+	CreatedAt *timestamppb.Timestamp `protobuf:"bytes,3,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	UpdatedAt *timestamppb.Timestamp `protobuf:"bytes,4,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
 }
 
 func (x *License) Reset() {

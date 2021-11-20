@@ -4,6 +4,7 @@ import (
 	"context"
 	"github.com/golang/mock/gomock"
 	mocks "github.com/ozonmp/lic-license-api/internal/mocks"
+	"github.com/ozonmp/lic-license-api/internal/service/license"
 	pb "github.com/ozonmp/lic-license-api/pkg/lic-license-api"
 	"github.com/stretchr/testify/assert"
 	"google.golang.org/grpc"
@@ -22,8 +23,9 @@ func dialer(t *testing.T) func(context.Context, string) (net.Conn, error) {
 
 	ctrl := gomock.NewController(t)
 	repo := mocks.NewMockRepo(ctrl)
-
-	pb.RegisterLicLicenseApiServiceServer(server, NewLicenseAPI(repo))
+	eventRepo := mocks.NewMockLicenseEventRepo(ctrl)
+	tsx := mocks.NewMockTransactionalSession(ctrl)
+	pb.RegisterLicLicenseApiServiceServer(server, NewLicenseAPI(license.NewLicenseService(repo, eventRepo, tsx)))
 
 	go func() {
 		if err := server.Serve(listener); err != nil {

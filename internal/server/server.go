@@ -4,6 +4,7 @@ import (
 	"context"
 	"errors"
 	"fmt"
+	servicerepo "github.com/ozonmp/lic-license-api/internal/repo/license/service"
 	"net"
 	"net/http"
 	"os"
@@ -26,7 +27,6 @@ import (
 
 	"github.com/ozonmp/lic-license-api/internal/api"
 	"github.com/ozonmp/lic-license-api/internal/config"
-	"github.com/ozonmp/lic-license-api/internal/repo"
 	pb "github.com/ozonmp/lic-license-api/pkg/lic-license-api"
 )
 
@@ -107,7 +107,8 @@ func (s *GrpcServer) Start(cfg *config.Config) error {
 		)),
 	)
 
-	r := repo.NewRepo(s.db, s.batchSize)
+	r := servicerepo.NewLicenceRepo(s.db, s.batchSize)
+	//r := repo.NewRepo(s.db, s.batchSize)
 
 	pb.RegisterLicLicenseApiServiceServer(grpcServer, api.NewLicenseAPI(r))
 	grpc_prometheus.EnableHandlingTimeHistogram()

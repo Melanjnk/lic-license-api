@@ -18,7 +18,7 @@ func (a *licenseAPI) ListLicenseV1(
 		return nil, status.Error(codes.InvalidArgument, err.Error())
 	}
 
-	licenses, err := a.repo.ListLicense(ctx, 0, 10)
+	licenses, err := a.licService.ListLicense(ctx, 0, 10)
 	if err != nil {
 		log.Error().Err(err).Msg("DescribeLicenseV1 -- failed")
 
