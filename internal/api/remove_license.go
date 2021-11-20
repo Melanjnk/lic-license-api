@@ -18,7 +18,7 @@ func (a *licenseAPI) RemoveLicenseV1(
 		return nil, status.Error(codes.InvalidArgument, err.Error())
 	}
 
-	ok, err := a.licService.RemoveLicense(ctx, req.LicenseId)
+	ok, err := a.licService.Remove(ctx, req.LicenseId)
 	if err != nil {
 		log.Error().Err(err).Msg("RemoveLicenseV1 -- failed")
 

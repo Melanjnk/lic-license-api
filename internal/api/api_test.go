@@ -22,10 +22,11 @@ func dialer(t *testing.T) func(context.Context, string) (net.Conn, error) {
 	server := grpc.NewServer()
 
 	ctrl := gomock.NewController(t)
-	repo := mocks.NewMockRepo(ctrl)
-	eventRepo := mocks.NewMockLicenseEventRepo(ctrl)
+	licRepo := mocks.NewMockLicenseRepo(ctrl)
+	eventRepo := mocks.NewMockEventRepo(ctrl)
 	tsx := mocks.NewMockTransactionalSession(ctrl)
-	pb.RegisterLicLicenseApiServiceServer(server, NewLicenseAPI(license.NewLicenseService(repo, eventRepo, tsx)))
+
+	pb.RegisterLicLicenseApiServiceServer(server, NewLicenseAPI(license.NewLicenseService(licRepo, eventRepo, tsx)))
 
 	go func() {
 		if err := server.Serve(listener); err != nil {

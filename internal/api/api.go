@@ -2,6 +2,8 @@ package api
 
 import (
 	"context"
+	//"github.com/ozonmp/lic-license-api/internal/model"
+	license "github.com/ozonmp/lic-license-api/internal/model/license"
 	model "github.com/ozonmp/lic-license-api/internal/model/license"
 	"github.com/prometheus/client_golang/prometheus"
 	"github.com/prometheus/client_golang/prometheus/promauto"
@@ -18,16 +20,15 @@ var (
 )
 
 type licenseService interface {
-	CreateLicense(ctx context.Context, license *model.License) (uint64, error)
-	DescribeLicense(ctx context.Context, licenseID uint64) (*model.License, error)
-	ListLicense(ctx context.Context, cursor uint64, limit uint64) ([]*model.License, error)
-	RemoveLicense(ctx context.Context, licenseID uint64) (bool, error)
+	Get(tx context.Context, subdomainID uint64) (*license.License, error)
+	Add(ctx context.Context, service *license.License) (uint64, error)
+	List(ctx context.Context, offset uint64, limit uint64) ([]*license.License, error)
+	Remove(ctx context.Context, serviceID uint64) (bool, error)
 }
 
 type licenseAPI struct {
 	pb.UnimplementedLicLicenseApiServiceServer
 	licService licenseService
-	//repo repo.LicenseRepo
 }
 
 // NewLicenseAPI returns api of lic-license-api service

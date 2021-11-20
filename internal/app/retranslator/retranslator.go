@@ -7,13 +7,20 @@ import (
 	"github.com/ozonmp/lic-license-api/internal/app/producer"
 	"github.com/ozonmp/lic-license-api/internal/app/repo"
 	"github.com/ozonmp/lic-license-api/internal/app/sender"
-	"github.com/ozonmp/lic-license-api/internal/model"
+	model "github.com/ozonmp/lic-license-api/internal/model/license"
 	"time"
 )
 
 type Retranslator interface {
 	Start(ctx context.Context)
 	Close()
+}
+
+// EventRepo интерфейс репозитория для сообщений.
+type EventRepo interface {
+	Lock(ctx context.Context, n uint64) ([]model.LicenseEvent, error)
+	Unlock(ctx context.Context, eventIDs []uint64) error
+	Remove(ctx context.Context, eventIDs []uint64) error
 }
 
 type Config struct {

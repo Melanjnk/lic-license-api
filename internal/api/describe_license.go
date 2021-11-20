@@ -21,7 +21,7 @@ func (a *licenseAPI) DescribeLicenseV1(
 		return nil, status.Error(codes.InvalidArgument, err.Error())
 	}
 
-	license, err := a.licService.DescribeLicense(ctx, req.LicenseId)
+	license, err := a.licService.Get(ctx, req.LicenseId)
 	if err != nil {
 		if errors.Is(err, model.ErrLicenseNotFound) {
 			log.Debug().Uint64("licenseId", req.GetLicenseId()).Msg("license not found")
