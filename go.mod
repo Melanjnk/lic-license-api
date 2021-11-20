@@ -1,4 +1,3 @@
-module github.com/ozonmp/omp-template-api
 module github.com/ozonmp/lic-license-api
 
 go 1.16
