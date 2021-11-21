@@ -2,8 +2,6 @@ package api
 
 import (
 	"context"
-	//"github.com/ozonmp/lic-license-api/internal/model"
-	license "github.com/ozonmp/lic-license-api/internal/model/license"
 	model "github.com/ozonmp/lic-license-api/internal/model/license"
 	"github.com/prometheus/client_golang/prometheus"
 	"github.com/prometheus/client_golang/prometheus/promauto"
@@ -20,9 +18,9 @@ var (
 )
 
 type licenseService interface {
-	Get(tx context.Context, subdomainID uint64) (*license.License, error)
-	Add(ctx context.Context, service *license.License) (uint64, error)
-	List(ctx context.Context, offset uint64, limit uint64) ([]*license.License, error)
+	Get(tx context.Context, subdomainID uint64) (*model.License, error)
+	Add(ctx context.Context, service *model.License) (uint64, error)
+	List(ctx context.Context, offset uint64, limit uint64) ([]*model.License, error)
 	Remove(ctx context.Context, serviceID uint64) (bool, error)
 }
 
