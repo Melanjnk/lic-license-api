@@ -28,5 +28,6 @@ require (
 
 replace (
 	github.com/ozonmp/lic-license-api/internal/mocks => ./internal/mocks
+	github.com/ozonmp/lic-license-api/internal/model/license => ./internal/model/license
 	github.com/ozonmp/lic-license-api/pkg/lic-license-api => ./pkg/lic-license-api
 )
