@@ -9,7 +9,7 @@ services:
     logging:
       driver: 'gelf'
       options:
-        gelf-address: 'udp://localhost:12201'
+        gelf-address: 'udp://localhost:12202'
         tag: lic-license-api
     networks:
       - ompnw
@@ -46,7 +46,7 @@ services:
     logging:
       driver: 'gelf'
       options:
-        gelf-address: 'udp://localhost:12201'
+        gelf-address: 'udp://localhost:12202'
         tag: postgres
     ports:
       - 5432:5432
@@ -68,7 +68,7 @@ services:
     logging:
       driver: 'gelf'
       options:
-        gelf-address: 'udp://localhost:12201'
+        gelf-address: 'udp://localhost:12202'
         tag: zookeeper
     ports:
       - 2181:2181
@@ -86,7 +86,7 @@ services:
     logging:
       driver: 'gelf'
       options:
-        gelf-address: 'udp://localhost:12201'
+        gelf-address: 'udp://localhost:12202'
         tag: kafka
     depends_on:
       - zookeeper
@@ -109,9 +109,9 @@ services:
     depends_on:
       - kafka
     ports:
-      - 9001:9001
+      - 9013:9013
     environment:
-      SERVER_PORT: 9001
+      SERVER_PORT: 9013
       KAFKA_BROKERCONNECT: "kafka:9092"
       JVM_OPTS: "-Xms16M -Xmx48M -Xss180K -XX:-TieredCompilation -XX:+UseStringDeduplication -noverify"
     networks:
@@ -137,7 +137,7 @@ services:
     logging:
       driver: 'gelf'
       options:
-        gelf-address: 'udp://localhost:12201'
+        gelf-address: 'udp://localhost:12202'
         tag: jaeger
     ports:
       - 6831:6831/udp
@@ -151,7 +151,7 @@ services:
     logging:
       driver: 'gelf'
       options:
-        gelf-address: 'udp://localhost:12201'
+        gelf-address: 'udp://localhost:12202'
         tag: prometheus
     ports:
       - 9090:9090
@@ -212,7 +212,7 @@ services:
       - GRAYLOG_PASSWORD_SECRET=somepasswordpepper
       # Password: admin
       - GRAYLOG_ROOT_PASSWORD_SHA2=8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
-      - GRAYLOG_HTTP_EXTERNAL_URI=http://127.0.0.1:9000/
+      - GRAYLOG_HTTP_EXTERNAL_URI=http://127.0.0.1:9012/
     entrypoint: /usr/bin/tini -- wait-for-it elasticsearch:9200 --  /docker-entrypoint.sh
     networks:
       - ompnw
@@ -224,15 +224,15 @@ services:
       - elasticsearch
     ports:
       # Graylog web interface and REST API
-      - 9000:9000
+      - 9012:9012
       # Syslog TCP
-      - 1514:1514
+      - 1574:1574
       # Syslog UDP
-      - 1514:1514/udp
+      - 1574:1574/udp
       # GELF TCP
-      - 12201:12201
+      - 12202:12202
       # GELF UDP
-      - 12201:12201/udp
+      - 12202:12202/udp
     restart: always
 
 volumes:
