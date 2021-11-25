@@ -5,10 +5,10 @@
 package mocks
 
 import (
-	license "github.com/ozonmp/lic-license-api/internal/model"
 	reflect "reflect"
 
 	gomock "github.com/golang/mock/gomock"
+	model "github.com/ozonmp/lic-license-api/internal/model"
 )
 
 // MockLicenseEventSender is a mock of LicenseEventSender interface.
@@ -35,7 +35,7 @@ func (m *MockLicenseEventSender) EXPECT() *MockLicenseEventSenderMockRecorder {
 }
 
 // Send mocks base method.
-func (m *MockLicenseEventSender) Send(arg0 *license.LicenseEvent) error {
+func (m *MockLicenseEventSender) Send(arg0 *model.LicenseEvent) error {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "Send", arg0)
 	ret0, _ := ret[0].(error)

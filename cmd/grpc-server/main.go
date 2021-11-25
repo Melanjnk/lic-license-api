@@ -12,10 +12,10 @@ import (
 	_ "github.com/jackc/pgx/v4/stdlib"
 	_ "github.com/lib/pq"
 
-	"github.com/ozonmp/omp-template-api/internal/config"
-	"github.com/ozonmp/omp-template-api/internal/database"
-	"github.com/ozonmp/omp-template-api/internal/server"
-	"github.com/ozonmp/omp-template-api/internal/tracer"
+	"github.com/ozonmp/lic-license-api/internal/config"
+	"github.com/ozonmp/lic-license-api/internal/database"
+	"github.com/ozonmp/lic-license-api/internal/server"
+	"github.com/ozonmp/lic-license-api/internal/tracer"
 )
 
 var (

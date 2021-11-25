@@ -1,38 +1,192 @@
-# lic-license-api
-lic-license-api
+# Ozon Marketplace License API
 
-![](./retranslator.png)
+---
 
-#### Задание 2
+## Build project
 
-1. Создать репозиторий именование которого указано в таблице прогресса [+]
+### Local
 
-2. Описать сущность `{domain}.{Subdomain}` и `{domain}.{Subdomain}Event` в **internal/model/{subdomain}.go** [+]
+For local assembly you need to perform
 
-3. Реализовать паттерн consumer-producer из **db** в **kafka** на основе интерфейсов`EventRepo` и `EventSender` для одного типа события **Created** [+]
+```zsh
+$ make deps # Installation of dependencies
+$ make build # Build project
+```
+## Running
 
-4. Написать тесты [-]
+### For local development
 
-5. Синхронизацию работы потоков сделать через `context` 💎  [+]
+```zsh
+$ docker-compose up -d
+```
 
-6. Создавать задачи у workerpool по обработке батчевых идентификаторов записей событий 💎 [-]
+---
 
-7. Поддержать несколько типов событий учитывая корректный порядок 💎 [-]
+## Guide For Tutor:
+### Simple way 
+1. install bloomrpc on your OS
 
-8. Реализовать гарантию доставки **At-least-once** 💎 [-]
+_example for Mac os_
+```bash
+brew install --cask bloomrpc
+```
+2. import to bloomgrpc `api/ozonmp/lic_license_api/v1/lic_license_api.proto`
 
-9. Найти скрытые ошибки в коде 💎 [-]
+   ![](./bloomgrpc-import-protos.png)
 
-**Рецепт**
+3. run
 
-[omp-demo-api](https://github.com/ozonmp/omp-demo-api)
+### Terminal way _(with grpc_cli)_
+1. install protobuf & grpc_cli
+```
+brew install protobuf
+brew tap grpc/grpc
+brew install --with-plugins grpc
+```
+2. run grpc_cli requests: 
+```
+grpc_cli call localhost:8082 CreateLicenseV1 "license_id: 1, title: 'abs'"
+grpc_cli call localhost:8082 DescribeLicenseV1 "license_id: 1"
+grpc_cli call localhost:8082 ListLicenseV1 ""
+grpc_cli call localhost:8082 RemoveLicenseV1 "license_id: 1" 
+```
+3. Examples of output (responses from grpc)
+```
+$ grpc_cli call localhost:8082 CreateLicenseV1 "license_id: 1, title: 'abs'"
+% connecting to localhost:8082
+% Rpc failed with status code 13, error message: not implemented
 
-P.S. Обратите внимание используется зеркальная (внешняя) точка зрения на вопрос, кто является потребителем, а кто является производителем.
-Поэтому паттерн назвали **consumer-producer** и классы переименовали.
+$ grpc_cli call localhost:8082 DescribeLicenseV1 "license_id: 1"                
+% connecting to localhost:8082
+% Rpc failed with status code 13, error message: not implemented
+
+$ grpc_cli call localhost:8082 ListLicenseV1 ""                           
+% connecting to localhost:8082
+% Rpc failed with status code 13, error message: not implemented
+
+$ grpc_cli call localhost:8082 RemoveLicenseV1 "license_id: 1"              
+% connecting to localhost:8082
+% Rpc failed with status code 13, error message: not implemented
+```
+
+---
+
+## Services
+
+### Swagger UI
+
+The Swagger UI is an open source project to visually render documentation for an API defined with the OpenAPI (Swagger) Specification
+
+- http://localhost:8081
+
+### Grafana:
+
+- http://localhost:3000
+- - login `admin`
+- - password `MYPASSWORT`
+
+### gRPC:
+
+- http://localhost:8082
+
+```sh
+[I] ➜ grpc_cli call localhost:8082 DescribeLicenseV1 "id: 1"
+connecting to localhost:8082
+Rpc failed with status code 5, error message: license not found
+```
+
+### Gateway:
+
+It reads protobuf service definitions and generates a reverse-proxy server which translates a RESTful HTTP API into gRPC
+
+- http://localhost:8080
+
+```sh
+[I] ➜ curl -s -X 'POST' \
+  'http://localhost:8080/v1/licences' \
+  -H 'accept: application/json' \
+  -H 'Content-Type: application/json' \
+  -d '{
+  "id": "1"
+}' | jq .
+{
+  "code": 5,
+  "message": "license not found",
+  "details": []
+}
+```
+
+### Metrics:
+
+Metrics GRPC Server
+
+- http://localhost:9100/metrics
+
+### Status:
+
+Service condition and its information
+
+- http://localhost:8000
+- - `/live`- Layed whether the server is running
+- - `/ready` - Is it ready to accept requests
+- - `/version` - Version and assembly information
+
+### Prometheus:
+
+Prometheus is an open-source systems monitoring and alerting toolkit
+
+- http://localhost:9090
+
+### Kafka
+
+Apache Kafka is an open-source distributed event streaming platform used by thousands of companies for high-performance data pipelines, streaming analytics, data integration, and mission-critical applications.
+
+- http://localhost:9094
+
+### Kafka UI
+
+UI for Apache Kafka is a simple tool that makes your data flows observable, helps find and troubleshoot issues faster and deliver optimal performance. Its lightweight dashboard makes it easy to track key metrics of your Kafka clusters - Brokers, Topics, Partitions, Production, and Consumption.
+
+- http://localhost:9001
+
+### Jaeger UI
+
+Monitor and troubleshoot transactions in complex distributed systems.
+
+- http://localhost:16686
+
+### Graylog
+
+Graylog is a leading centralized log management solution for capturing, storing, and enabling real-time analysis of terabytes of machine data.
+
+- http://localhost:9000
+- - login `admin`
+- - password `admin`
+
+### PostgreSQL
+
+For the convenience of working with the database, you can use the [pgcli](https://github.com/dbcli/pgcli) utility. Migrations are rolled out when the service starts. migrations are located in the **./migrations** directory and are created using the [goose](https://github.com/pressly/goose) tool.
+
+```sh
+$ pgcli "postgresql://docker:docker@localhost:5432/lic_license_api"
+```
+
+### Python client
+
+```shell
+$ python -m venv .venv
+$ . .venv/bin/activate
+$ make deps
+$ make generate
+$ cd pypkg/lic-license-api
+$ python setup.py install
+$ cd ../..
+$ docker-compose up -d
+$ python scripts/grpc_client.py
+```
 
 
-dfddf
+### Thanks
 
-
-//go:generate mockgen -destination=./mocks/sender_license_mock.go -package=mocks github.com/Melanjnk/lic-license-api/internal/app/sender LicenseEventSender
-//go:generate mockgen -destination=./mocks/worker_pool_mock.go -package=mocks github.com/Melanjnk/lic-license-api/internal/app/sender WorkerLicPool
+- [Evald Smalyakov](https://github.com/evald24)
+- [Michael Morgoev](https://github.com/zerospiel)

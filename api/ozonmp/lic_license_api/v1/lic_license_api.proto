@@ -1,0 +1,79 @@
+syntax = "proto3";
+
+package ozonmp.lic_license_api.v1;
+
+import "validate/validate.proto";
+import "google/api/annotations.proto";
+import "google/protobuf/timestamp.proto";
+
+option go_package = "github.com/ozonmp/lic-license-api/pkg/lic-license-api";
+
+// LicLicenseApiService - Service for working with licenses
+service LicLicenseApiService {
+  // CreateLicenseV1 - Create a license
+  rpc CreateLicenseV1(CreateLicenseV1Request) returns (CreateLicenseV1Response) {
+    option (google.api.http) = {
+      post: "/v1/licenses",
+      body: '*'
+    };
+  }
+  // DescribeLicenseV1 - Describe a license
+  rpc DescribeLicenseV1(DescribeLicenseV1Request) returns (DescribeLicenseV1Response) {
+    option (google.api.http) = {
+      get: "/v1/licenses/{license_id}"
+    };
+  }
+  // ListLicenseV1 - Describe a license
+  rpc ListLicenseV1(ListLicenseV1Request) returns (ListLicenseV1Response) {
+    option (google.api.http) = {
+      get: "/v1/licenses"
+    };
+  }
+  // RemoveLicenseV1 - Remove a license
+  rpc RemoveLicenseV1(RemoveLicenseV1Request) returns (RemoveLicenseV1Response) {
+    option (google.api.http) = {
+      get: "/v1/licenses/{license_id}"
+    };
+  }
+}
+
+message License {
+  uint64 license_id  = 1;
+  uint64 title = 2;
+  google.protobuf.Timestamp created = 3;
+}
+
+message CreateLicenseV1Request {
+  uint64 license_id = 1 [(validate.rules).uint64.gt = 0];
+  string title = 2 [(validate.rules).string={min_len: 1, max_len: 150}];
+}
+
+message CreateLicenseV1Response {
+  uint64 license_id = 1;
+}
+
+message DescribeLicenseV1Request {
+  uint64 license_id = 1 [(validate.rules).uint64.gt = 0];
+}
+
+message DescribeLicenseV1Response {
+  License license = 1;
+}
+
+message ListLicenseV1Request {
+}
+
+message ListLicenseV1Response {
+  repeated License licenses = 1;
+}
+
+
+message RemoveLicenseV1Request {
+  uint64 license_id = 1 [(validate.rules).uint64.gt = 0];
+}
+
+message RemoveLicenseV1Response {
+  bool found = 1;
+}
+
+

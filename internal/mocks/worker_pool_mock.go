@@ -5,10 +5,10 @@
 package mocks
 
 import (
-	license "github.com/ozonmp/lic-license-api/internal/model"
 	reflect "reflect"
 
 	gomock "github.com/golang/mock/gomock"
+	model "github.com/ozonmp/lic-license-api/internal/model"
 )
 
 // MockWorkerLicPool is a mock of WorkerLicPool interface.
@@ -35,7 +35,7 @@ func (m *MockWorkerLicPool) EXPECT() *MockWorkerLicPoolMockRecorder {
 }
 
 // Clean mocks base method.
-func (m *MockWorkerLicPool) Clean(arg0 license.LicenseEvent) error {
+func (m *MockWorkerLicPool) Clean(arg0 model.LicenseEvent) error {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "Clean", arg0)
 	ret0, _ := ret[0].(error)
@@ -61,7 +61,7 @@ func (mr *MockWorkerLicPoolMockRecorder) Stop() *gomock.Call {
 }
 
 // Update mocks base method.
-func (m *MockWorkerLicPool) Update(arg0 license.LicenseEvent) error {
+func (m *MockWorkerLicPool) Update(arg0 model.LicenseEvent) error {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "Update", arg0)
 	ret0, _ := ret[0].(error)
