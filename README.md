@@ -22,6 +22,55 @@ $ docker-compose up -d
 
 ---
 
+## Guide For Tutor:
+### Simple way 
+1. install bloomrpc on your OS
+
+_example for Mac os_
+```bash
+brew install --cask bloomrpc
+```
+2. import to bloomgrpc `api/ozonmp/lic_license_api/v1/lic_license_api.proto`
+
+   ![](./bloomgrpc-import-protos.png)
+
+3. run
+
+### Terminal way _(with grpc_cli)_
+1. install protobuf & grpc_cli
+```
+brew install protobuf
+brew tap grpc/grpc
+brew install --with-plugins grpc
+```
+2. run grpc_cli requests: 
+```
+grpc_cli call localhost:8082 CreateLicenseV1 "license_id: 1, title: 'abs'"
+grpc_cli call localhost:8082 DescribeLicenseV1 "license_id: 1"
+grpc_cli call localhost:8082 ListLicenseV1 ""
+grpc_cli call localhost:8082 RemoveLicenseV1 "license_id: 1" 
+```
+3. Examples of output (responses from grpc)
+```
+$ grpc_cli call localhost:8082 CreateLicenseV1 "license_id: 1, title: 'abs'"
+% connecting to localhost:8082
+% Rpc failed with status code 13, error message: not implemented
+
+$ grpc_cli call localhost:8082 DescribeLicenseV1 "license_id: 1"                
+% connecting to localhost:8082
+% Rpc failed with status code 13, error message: not implemented
+
+$ grpc_cli call localhost:8082 ListLicenseV1 ""                           
+% connecting to localhost:8082
+% Rpc failed with status code 13, error message: not implemented
+
+$ grpc_cli call localhost:8082 RemoveLicenseV1 "license_id: 1"              
+% connecting to localhost:8082
+% Rpc failed with status code 13, error message: not implemented
+```
+
+---
+
 ## Services
 
 ### Swagger UI
