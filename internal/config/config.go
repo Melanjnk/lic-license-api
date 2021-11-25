@@ -60,14 +60,15 @@ type Project struct {
 	CommitHash  string
 }
 
-// Metrics - contains all parameters metrics information.
+// Metrics - contains all parameters' metrics information.
 type Metrics struct {
-	Port int    `yaml:"port"`
-	Host string `yaml:"host"`
-	Path string `yaml:"path"`
+	Port      int    `yaml:"port"`
+	Host      string `yaml:"host"`
+	Path      string `yaml:"path"`
+	Subsystem string `yaml:"subsystem"`
 }
 
-// Jaeger - contains all parameters metrics information.
+// Jaeger - contains all parameters' metrics information.
 type Jaeger struct {
 	Service string `yaml:"service"`
 	Host    string `yaml:"host"`
