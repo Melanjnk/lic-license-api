@@ -4,6 +4,7 @@ import (
 	"context"
 	"errors"
 	"fmt"
+	"github.com/ozonmp/lic-license-api/internal/model/license"
 	"net"
 	"net/http"
 	"os"
@@ -26,21 +27,28 @@ import (
 
 	"github.com/ozonmp/lic-license-api/internal/api"
 	"github.com/ozonmp/lic-license-api/internal/config"
-	"github.com/ozonmp/lic-license-api/internal/repo"
 	pb "github.com/ozonmp/lic-license-api/pkg/lic-license-api"
 )
 
+type licenseService interface {
+	Get(tx context.Context, subdomainID uint64) (*license.License, error)
+	Add(ctx context.Context, service *license.License) (uint64, error)
+	List(ctx context.Context, offset uint64, limit uint64) ([]*license.License, error)
+	Remove(ctx context.Context, serviceID uint64) (bool, error)
+}
+
 // GrpcServer is gRPC server
 type GrpcServer struct {
-	db        *sqlx.DB
-	batchSize uint
+	service licenseService
+	//db        *sqlx.DB
+	//batchSize uint
 }
 
 // NewGrpcServer returns gRPC server with supporting of batch listing
 func NewGrpcServer(db *sqlx.DB, batchSize uint) *GrpcServer {
 	return &GrpcServer{
-		db:        db,
-		batchSize: batchSize,
+		//db:        db,
+		//batchSize: batchSize,
 	}
 }
 
@@ -107,9 +115,7 @@ func (s *GrpcServer) Start(cfg *config.Config) error {
 		)),
 	)
 
-	r := repo.NewRepo(s.db, s.batchSize)
-
-	pb.RegisterLicLicenseApiServiceServer(grpcServer, api.NewLicenseAPI(r))
+	pb.RegisterLicLicenseApiServiceServer(grpcServer, api.NewLicenseAPI(s.service))
 	grpc_prometheus.EnableHandlingTimeHistogram()
 	grpc_prometheus.Register(grpcServer)
 

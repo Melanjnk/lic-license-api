@@ -2,7 +2,7 @@ package api
 
 import (
 	"context"
-	"github.com/ozonmp/lic-license-api/internal/model"
+	model "github.com/ozonmp/lic-license-api/internal/model/license"
 	pb "github.com/ozonmp/lic-license-api/pkg/lic-license-api"
 	"github.com/rs/zerolog/log"
 	"google.golang.org/grpc/codes"
@@ -23,7 +23,7 @@ func (a *licenseAPI) CreateLicenseV1(
 		ID:    1,
 		Title: "Lic 1",
 	}
-	licenseID, err := a.repo.CreateLicense(ctx, &res)
+	licenseID, err := a.licService.Add(ctx, &res)
 	if err != nil {
 		log.Err(err).Msg("CreateLicenseV1 -- failed")
 

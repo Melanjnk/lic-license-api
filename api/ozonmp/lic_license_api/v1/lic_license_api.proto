@@ -39,8 +39,9 @@ service LicLicenseApiService {
 
 message License {
   uint64 license_id  = 1;
-  uint64 title = 2;
-  google.protobuf.Timestamp created = 3;
+  string title = 2;
+  google.protobuf.Timestamp created_at = 3;
+  google.protobuf.Timestamp updated_at = 4;
 }
 
 message CreateLicenseV1Request {
@@ -74,6 +75,11 @@ message RemoveLicenseV1Request {
 
 message RemoveLicenseV1Response {
   bool found = 1;
+}
+
+message LicenseEventPayload {
+  uint64 license_id = 1 [(validate.rules).uint64.gt = 0];
+  string title = 2 [(validate.rules).string={ min_len: 1, max_len: 150 }];
 }
 
 

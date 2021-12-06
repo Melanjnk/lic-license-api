@@ -3,7 +3,7 @@ package consumer
 import (
 	"context"
 	"github.com/ozonmp/lic-license-api/internal/app/repo"
-	"github.com/ozonmp/lic-license-api/internal/model"
+	model "github.com/ozonmp/lic-license-api/internal/model/license"
 	"sync"
 	"time"
 )

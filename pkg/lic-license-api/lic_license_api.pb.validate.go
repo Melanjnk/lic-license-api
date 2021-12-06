@@ -44,10 +44,20 @@ func (m *License) Validate() error {
 
 	// no validation rules for Title
 
-	if v, ok := interface{}(m.GetCreated()).(interface{ Validate() error }); ok {
+	if v, ok := interface{}(m.GetCreatedAt()).(interface{ Validate() error }); ok {
 		if err := v.Validate(); err != nil {
 			return LicenseValidationError{
-				field:  "Created",
+				field:  "CreatedAt",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if v, ok := interface{}(m.GetUpdatedAt()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return LicenseValidationError{
+				field:  "UpdatedAt",
 				reason: "embedded message failed validation",
 				cause:  err,
 			}
@@ -703,3 +713,84 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = RemoveLicenseV1ResponseValidationError{}
+
+// Validate checks the field values on LicenseEventPayload with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, an error is returned.
+func (m *LicenseEventPayload) Validate() error {
+	if m == nil {
+		return nil
+	}
+
+	if m.GetLicenseId() <= 0 {
+		return LicenseEventPayloadValidationError{
+			field:  "LicenseId",
+			reason: "value must be greater than 0",
+		}
+	}
+
+	if l := utf8.RuneCountInString(m.GetTitle()); l < 1 || l > 150 {
+		return LicenseEventPayloadValidationError{
+			field:  "Title",
+			reason: "value length must be between 1 and 150 runes, inclusive",
+		}
+	}
+
+	return nil
+}
+
+// LicenseEventPayloadValidationError is the validation error returned by
+// LicenseEventPayload.Validate if the designated constraints aren't met.
+type LicenseEventPayloadValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e LicenseEventPayloadValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e LicenseEventPayloadValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e LicenseEventPayloadValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e LicenseEventPayloadValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e LicenseEventPayloadValidationError) ErrorName() string {
+	return "LicenseEventPayloadValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e LicenseEventPayloadValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sLicenseEventPayload.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = LicenseEventPayloadValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = LicenseEventPayloadValidationError{}

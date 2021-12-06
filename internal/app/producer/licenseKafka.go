@@ -5,7 +5,7 @@ import (
 	"github.com/gammazero/workerpool"
 	"github.com/ozonmp/lic-license-api/internal/app/repo"
 	"github.com/ozonmp/lic-license-api/internal/app/sender"
-	"github.com/ozonmp/lic-license-api/internal/model"
+	model "github.com/ozonmp/lic-license-api/internal/model/license"
 
 	"sync"
 )
