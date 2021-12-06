@@ -3,6 +3,7 @@ package server
 import (
 	"context"
 	"errors"
+	"github.com/ozonmp/lic-license-api/internal/pkg/logger"
 	"net/http"
 
 	grpc_opentracing "github.com/grpc-ecosystem/go-grpc-middleware/tracing/opentracing"
@@ -11,7 +12,6 @@ import (
 	"github.com/opentracing/opentracing-go/ext"
 	"github.com/prometheus/client_golang/prometheus"
 	"github.com/prometheus/client_golang/prometheus/promauto"
-	"github.com/rs/zerolog/log"
 	"google.golang.org/grpc"
 
 	pb "github.com/ozonmp/lic-license-api/pkg/lic-license-api"
@@ -24,7 +24,7 @@ var (
 	})
 )
 
-func createGatewayServer(grpcAddr, gatewayAddr string) *http.Server {
+func createGatewayServer(ctx context.Context, grpcAddr, gatewayAddr string) *http.Server {
 	// Create a client connection to the gRPC Server we just started.
 	// This is where the gRPC-Gateway proxies the requests.
 	conn, err := grpc.DialContext(
@@ -38,12 +38,12 @@ func createGatewayServer(grpcAddr, gatewayAddr string) *http.Server {
 		grpc.WithInsecure(),
 	)
 	if err != nil {
-		log.Fatal().Err(err).Msg("Failed to dial server")
+		logger.FatalKV(ctx, "Failed to dial server")
 	}
 
 	mux := runtime.NewServeMux()
 	if err := pb.RegisterLicLicenseApiServiceHandler(context.Background(), mux, conn); err != nil {
-		log.Fatal().Err(err).Msg("Failed registration handler")
+		logger.FatalKV(ctx, "Failed registration handler")
 	}
 
 	gatewayServer := &http.Server{

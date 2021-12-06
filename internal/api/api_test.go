@@ -4,17 +4,32 @@ import (
 	"context"
 	"github.com/golang/mock/gomock"
 	mocks "github.com/ozonmp/lic-license-api/internal/mocks"
+	"github.com/ozonmp/lic-license-api/internal/pkg/logger"
 	"github.com/ozonmp/lic-license-api/internal/service/license"
 	pb "github.com/ozonmp/lic-license-api/pkg/lic-license-api"
 	"github.com/stretchr/testify/assert"
+	"go.uber.org/zap"
+	"go.uber.org/zap/zapcore"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
 	"google.golang.org/grpc/test/bufconn"
 	"log"
 	"net"
+	"os"
 	"testing"
 )
+
+func initLogger() {
+	consoleCore := zapcore.NewCore(
+		zapcore.NewJSONEncoder(zap.NewProductionEncoderConfig()),
+		os.Stderr,
+		zap.NewAtomicLevelAt(zap.PanicLevel),
+	)
+	notSugaredLogger := zap.New(consoleCore)
+	sugaredLogger := notSugaredLogger.Sugar()
+	logger.SetLogger(sugaredLogger)
+}
 
 func dialer(t *testing.T) func(context.Context, string) (net.Conn, error) {
 	listener := bufconn.Listen(1024 * 1024)
@@ -55,6 +70,7 @@ func prepareClient(ctx context.Context, t *testing.T) (client pb.LicLicenseApiSe
 
 func TestLicenseAPI_CreateLicenseV1(t *testing.T) {
 	ctx := context.Background()
+	initLogger()
 
 	client, closeCl := prepareClient(ctx, t)
 	defer closeCl()
@@ -78,6 +94,7 @@ func TestLicenseAPI_CreateLicenseV1(t *testing.T) {
 
 func TestLicenseAPI_DescribeLicenseV1(t *testing.T) {
 	ctx := context.Background()
+	initLogger()
 
 	client, closeCl := prepareClient(ctx, t)
 	defer closeCl()
@@ -101,6 +118,7 @@ func TestLicenseAPI_DescribeLicenseV1(t *testing.T) {
 
 func TestLicenseAPI_ListLicenseV1(t *testing.T) {
 	ctx := context.Background()
+	initLogger()
 
 	client, closeCl := prepareClient(ctx, t)
 	defer closeCl()
@@ -125,6 +143,7 @@ func TestLicenseAPI_ListLicenseV1(t *testing.T) {
 
 func TestLicenseAPI_RemoveLicenseV1(t *testing.T) {
 	ctx := context.Background()
+	initLogger()
 
 	client, closeCl := prepareClient(ctx, t)
 	defer closeCl()

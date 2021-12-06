@@ -3,8 +3,8 @@ package api
 import (
 	"context"
 	model "github.com/ozonmp/lic-license-api/internal/model/license"
+	"github.com/ozonmp/lic-license-api/internal/pkg/logger"
 	pb "github.com/ozonmp/lic-license-api/pkg/lic-license-api"
-	"github.com/rs/zerolog/log"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
 )
@@ -15,7 +15,7 @@ func (a *licenseAPI) CreateLicenseV1(
 ) (*pb.CreateLicenseV1Response, error) {
 
 	if err := req.Validate(); err != nil {
-		log.Error().Err(err).Msg("CreateLicenseV1Request - invalid argument")
+		logger.WarnKV(ctx, "CreateLicenseV1Request - invalid argument", "err", err)
 
 		return nil, status.Error(codes.InvalidArgument, err.Error())
 	}
@@ -25,12 +25,12 @@ func (a *licenseAPI) CreateLicenseV1(
 	}
 	licenseID, err := a.licService.Add(ctx, &res)
 	if err != nil {
-		log.Err(err).Msg("CreateLicenseV1 -- failed")
+		logger.ErrorKV(ctx, "CreateLicenseV1 -- failed", "err", err)
 
 		return nil, status.Error(codes.Internal, err.Error())
 	}
 
-	log.Debug().Msg("CreateLicenseV1 - success")
+	logger.DebugKV(ctx, "CreateLicenseV1 - success")
 
 	return &pb.CreateLicenseV1Response{
 		LicenseId: licenseID,

@@ -4,10 +4,11 @@ import (
 	"context"
 	"errors"
 	model "github.com/ozonmp/lic-license-api/internal/model/license"
+	"github.com/ozonmp/lic-license-api/internal/pkg/logger"
 	pb "github.com/ozonmp/lic-license-api/pkg/lic-license-api"
-	"github.com/rs/zerolog/log"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
+	"strconv"
 )
 
 func (a *licenseAPI) DescribeLicenseV1(
@@ -16,7 +17,7 @@ func (a *licenseAPI) DescribeLicenseV1(
 ) (*pb.DescribeLicenseV1Response, error) {
 
 	if err := req.Validate(); err != nil {
-		log.Error().Err(err).Msg("DescribeLicenseV1 - invalid argument")
+		logger.WarnKV(ctx, "DescribeLicenseV1 - invalid argument", "err", err)
 
 		return nil, status.Error(codes.InvalidArgument, err.Error())
 	}
@@ -24,23 +25,28 @@ func (a *licenseAPI) DescribeLicenseV1(
 	license, err := a.licService.Get(ctx, req.LicenseId)
 	if err != nil {
 		if errors.Is(err, model.ErrLicenseNotFound) {
-			log.Debug().Uint64("licenseId", req.GetLicenseId()).Msg("license not found")
+			logger.WarnKV(ctx, "License #"+
+				strconv.FormatUint(req.GetLicenseId(), 10)+
+				" not found")
+
 			totalTemplateNotFound.Inc()
-			return nil, status.Error(codes.NotFound, "license not found")
+			return nil, status.Error(codes.NotFound, "License not found")
 		}
-		log.Error().Err(err).Msg("DescribeLicenseV1 -- failed")
+		logger.WarnKV(ctx, "DescribeLicenseV1 -- failed", "err", err)
 
 		return nil, status.Error(codes.Internal, err.Error())
 	}
 
 	if license == nil {
-		log.Debug().Uint64("licenseId", req.LicenseId).Msg("license not found")
+		logger.DebugKV(ctx, "License #"+
+			strconv.FormatUint(req.GetLicenseId(), 10)+
+			" not found")
 		totalTemplateNotFound.Inc()
 
-		return nil, status.Error(codes.NotFound, "license not found")
+		return nil, status.Error(codes.NotFound, "License not found")
 	}
 
-	log.Debug().Msg("DescribeTemplateV1 - success")
+	logger.DebugKV(ctx, "DescribeTemplateV1 - success", "err", err)
 
 	return &pb.DescribeLicenseV1Response{
 		License: convertServiceToPb(license),
